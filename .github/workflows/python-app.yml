@@ -30,5 +30,6 @@ jobs:
         poetry install
     - name: Test with pytest
       run: |
-        PYTHONPATH=$(pwd) poetry run pytest
+        PYTHONPATH=$(pwd) poetry run python -m unittest discover tests
+        
         
