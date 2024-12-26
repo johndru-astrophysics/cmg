@@ -1,2 +1,4 @@
-# cmg
-C++ model generation
+C++ Model Generation (CMG)
+==========================
+
+TBD
