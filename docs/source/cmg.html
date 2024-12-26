@@ -52,8 +52,6 @@
 </li>
 <li><a class="reference internal" href="#module-cmg.schema">cmg.schema module</a><ul>
 <li><a class="reference internal" href="#cmg.schema.Field"><code class="docutils literal notranslate"><span class="pre">Field</span></code></a><ul>
-<li><a class="reference internal" href="#cmg.schema.Field.child_field"><code class="docutils literal notranslate"><span class="pre">Field.child_field</span></code></a></li>
-<li><a class="reference internal" href="#cmg.schema.Field.child_klass"><code class="docutils literal notranslate"><span class="pre">Field.child_klass</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Field.default"><code class="docutils literal notranslate"><span class="pre">Field.default</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Field.description"><code class="docutils literal notranslate"><span class="pre">Field.description</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Field.example"><code class="docutils literal notranslate"><span class="pre">Field.example</span></code></a></li>
@@ -65,11 +63,8 @@
 <li><a class="reference internal" href="#cmg.schema.Field.is_list"><code class="docutils literal notranslate"><span class="pre">Field.is_list</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Field.is_optional"><code class="docutils literal notranslate"><span class="pre">Field.is_optional</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Field.is_reference"><code class="docutils literal notranslate"><span class="pre">Field.is_reference()</span></code></a></li>
-<li><a class="reference internal" href="#cmg.schema.Field.klass"><code class="docutils literal notranslate"><span class="pre">Field.klass</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Field.name"><code class="docutils literal notranslate"><span class="pre">Field.name</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Field.parent"><code class="docutils literal notranslate"><span class="pre">Field.parent</span></code></a></li>
-<li><a class="reference internal" href="#cmg.schema.Field.parent_field"><code class="docutils literal notranslate"><span class="pre">Field.parent_field</span></code></a></li>
-<li><a class="reference internal" href="#cmg.schema.Field.parent_klass"><code class="docutils literal notranslate"><span class="pre">Field.parent_klass</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Field.to_camel_case"><code class="docutils literal notranslate"><span class="pre">Field.to_camel_case()</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Field.type"><code class="docutils literal notranslate"><span class="pre">Field.type</span></code></a></li>
 </ul>
@@ -93,7 +88,6 @@
 <li><a class="reference internal" href="#cmg.schema.Klass.init_fields"><code class="docutils literal notranslate"><span class="pre">Klass.init_fields()</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Klass.link"><code class="docutils literal notranslate"><span class="pre">Klass.link()</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Klass.name"><code class="docutils literal notranslate"><span class="pre">Klass.name</span></code></a></li>
-<li><a class="reference internal" href="#cmg.schema.Klass.schema"><code class="docutils literal notranslate"><span class="pre">Klass.schema</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Klass.to_snake_case"><code class="docutils literal notranslate"><span class="pre">Klass.to_snake_case()</span></code></a></li>
 </ul>
 </li>
@@ -172,7 +166,7 @@
 <p>A schema used to define the structure of the data in a model.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cmg.schema.Field">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.schema.</span></span><span class="sig-name descname"><span class="pre">Field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">example</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">klass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cmg.schema.Klass" title="cmg.schema.Klass"><span class="pre">Klass</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_child</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_optional</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_klass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cmg.schema.Klass" title="cmg.schema.Klass"><span class="pre">Klass</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cmg.schema.Field" title="cmg.schema.Field"><span class="pre">Field</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">child_klass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cmg.schema.Klass" title="cmg.schema.Klass"><span class="pre">Klass</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">child_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cmg.schema.Field" title="cmg.schema.Field"><span class="pre">Field</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.schema.Field" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.schema.</span></span><span class="sig-name descname"><span class="pre">Field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">example</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_child</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_optional</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.schema.Field" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A field used to define the structure of the data in a model.</p>
 <dl>
@@ -180,28 +174,13 @@
 <p>description (str): The description of the field.</p>
 <p>type (str): The type of the field.</p>
 <p>example (Any): The example value of the field.</p>
-<p>klass (Optional[Klass]): The class of the field.</p>
 <p>default (Optional[Any]): The default value of the field.</p>
 <p>parent (Optional[str]): The parent of the field.</p>
 <p>is_child (bool): Whether the field is a child.</p>
 <p>is_list (bool): Whether the field is a list.</p>
 <p>is_optional (bool): Whether the field is optional.</p>
-<p>parent_klass (Optional[Klass]): The parent class of the field.</p>
-<p>parent_field (Optional[Field]): The parent field of the field.</p>
-<p>child_klass (Optional[Klass]): The child class of the field.</p>
-<p>child_field (Optional[Field]): The child field of the field.</p>
 </dd>
 </dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cmg.schema.Field.child_field">
-<span class="sig-name descname"><span class="pre">child_field</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#cmg.schema.Field" title="cmg.schema.Field"><span class="pre">Field</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cmg.schema.Field.child_field" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cmg.schema.Field.child_klass">
-<span class="sig-name descname"><span class="pre">child_klass</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#cmg.schema.Klass" title="cmg.schema.Klass"><span class="pre">Klass</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cmg.schema.Field.child_klass" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cmg.schema.Field.default">
 <span class="sig-name descname"><span class="pre">default</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cmg.schema.Field.default" title="Link to this definition"></a></dt>
@@ -288,11 +267,6 @@ cast (bool): Whether to cast the type.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="cmg.schema.Field.klass">
-<span class="sig-name descname"><span class="pre">klass</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#cmg.schema.Klass" title="cmg.schema.Klass"><span class="pre">Klass</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cmg.schema.Field.klass" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="cmg.schema.Field.name">
 <span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#cmg.schema.Field.name" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -300,16 +274,6 @@ cast (bool): Whether to cast the type.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cmg.schema.Field.parent">
 <span class="sig-name descname"><span class="pre">parent</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cmg.schema.Field.parent" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cmg.schema.Field.parent_field">
-<span class="sig-name descname"><span class="pre">parent_field</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#cmg.schema.Field" title="cmg.schema.Field"><span class="pre">Field</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cmg.schema.Field.parent_field" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cmg.schema.Field.parent_klass">
-<span class="sig-name descname"><span class="pre">parent_klass</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#cmg.schema.Klass" title="cmg.schema.Klass"><span class="pre">Klass</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cmg.schema.Field.parent_klass" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -333,13 +297,12 @@ cast (bool): Whether to cast the type.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cmg.schema.Klass">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.schema.</span></span><span class="sig-name descname"><span class="pre">Klass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema:</span> <span class="pre">~cmg.schema.Schema</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields:</span> <span class="pre">~typing.List[~cmg.schema.Field]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.schema.Klass" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.schema.</span></span><span class="sig-name descname"><span class="pre">Klass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields:</span> <span class="pre">~typing.List[~cmg.schema.Field]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.schema.Klass" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A class used to define the structure of the data in a model.</p>
 <dl>
 <dt>Attributes:</dt><dd><p>name (str): The name of the class.</p>
 <p>description (str): The description of the class.</p>
-<p>schema (Schema): The schema of the class.</p>
 <p>fields (List[Field]): The fields in the class.</p>
 </dd>
 </dl>
@@ -506,11 +469,6 @@ cast (bool): Whether to cast the type.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cmg.schema.Klass.name">
 <span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#cmg.schema.Klass.name" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cmg.schema.Klass.schema">
-<span class="sig-name descname"><span class="pre">schema</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#cmg.schema.Schema" title="cmg.schema.Schema"><span class="pre">Schema</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cmg.schema.Klass.schema" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">

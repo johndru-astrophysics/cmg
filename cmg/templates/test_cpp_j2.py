@@ -15,7 +15,7 @@ protected:
     {
     {%- for field in klass.get_parent_fields() %}
         // Create parent object
-        {{field.to_camel_case()}} = {{field.parent_klass.name}}::create({{field.parent_klass.get_example_arguments()}}){% if loop.index > 1 %}.lock()->getptr(){% endif %};
+        {{field.to_camel_case()}} = {{field._parent_klass.name}}::create({{field._parent_klass.get_example_arguments()}}){% if loop.index > 1 %}.lock()->getptr(){% endif %};
     {%- endfor %}
         // Create test object
     {%- if klass.has_parent() %}
@@ -25,7 +25,7 @@ protected:
     {%- endif %}
     {%- for field in klass.get_ordered_fields() %}
         {%- if field.is_child %}
-        auto child{{loop.index}} = {{field.child_klass.name}}::create({{field.child_klass.get_example_arguments()}}).lock()->getptr();
+        auto child{{loop.index}} = {{field._child_klass.name}}::create({{field._child_klass.get_example_arguments()}}).lock()->getptr();
             {%- if field.is_list %}
         {{klass.get_var_name()}}->addTo{{field.to_camel_case(upper_first=True)}}(child{{loop.index}});
             {%- else %}
@@ -38,7 +38,7 @@ protected:
     }
 
     {%- for field in klass.get_parent_fields() %}
-    std::shared_ptr<{{field.parent_klass.name}}> {{field.to_camel_case()}};
+    std::shared_ptr<{{field._parent_klass.name}}> {{field.to_camel_case()}};
     {%- endfor %}
     std::shared_ptr<{{klass.name}}> {{klass.get_var_name()}};
 };
@@ -88,19 +88,19 @@ TEST_F(Test{{klass.name}}, test_update)
     
     // Test parent field
         {%- for field in klass.get_parent_fields() %}
-    auto other{{field.to_camel_case(upper_first=True)}} = {{field.parent_klass.name}}::create({{field.parent_klass.get_example_arguments()}}){% if loop.index > 1 %}.lock()->getptr(){% endif %};
+    auto other{{field.to_camel_case(upper_first=True)}} = {{field._parent_klass.name}}::create({{field._parent_klass.get_example_arguments()}}){% if loop.index > 1 %}.lock()->getptr(){% endif %};
         {%- endfor %}
     {%- set parent_field = klass.get_parent_field() %}
     {%- set parent_field_name = parent_field.to_camel_case() %}
     {%- set parent_field_name_title = parent_field.to_camel_case(upper_first=True) %}
     {{klass.get_var_name()}}->update({%raw%}{{{%endraw%}"{{parent_field_name}}", other{{parent_field_name_title}}{%raw%}}}{%endraw%});
     EXPECT_EQ({{klass.get_var_name()}}->get{{parent_field_name_title}}().lock(), other{{parent_field_name_title}});
-        {%- if parent_field.parent_field.is_list %}
-    EXPECT_EQ(other{{parent_field_name_title}}->get{{parent_field.parent_field.to_camel_case(upper_first=True)}}().size(), 1);
-    EXPECT_EQ({{parent_field_name}}->get{{parent_field.parent_field.to_camel_case(upper_first=True)}}().size(), 0);
+        {%- if parent_field._parent_field.is_list %}
+    EXPECT_EQ(other{{parent_field_name_title}}->get{{parent_field._parent_field.to_camel_case(upper_first=True)}}().size(), 1);
+    EXPECT_EQ({{parent_field_name}}->get{{parent_field._parent_field.to_camel_case(upper_first=True)}}().size(), 0);
         {%- else %}
-    EXPECT_EQ(other{{parent_field_name_title}}->get{{parent_field.parent_field.to_camel_case(upper_first=True)}}(), {{klass.get_var_name()}});
-    EXPECT_EQ({{parent_field_name}}->get{{parent_field.parent_field.to_camel_case(upper_first=True)}}(), nullptr);
+    EXPECT_EQ(other{{parent_field_name_title}}->get{{parent_field._parent_field.to_camel_case(upper_first=True)}}(), {{klass.get_var_name()}});
+    EXPECT_EQ({{parent_field_name}}->get{{parent_field._parent_field.to_camel_case(upper_first=True)}}(), nullptr);
         {%- endif %}
     {%- endif %}
 

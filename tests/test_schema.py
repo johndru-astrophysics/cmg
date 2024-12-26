@@ -34,8 +34,8 @@ class TestSchema(unittest.TestCase):
 
     def test_schema_link(self):
         self.schema.link()
-        self.assertEqual(self.klass.schema, self.schema)
-        self.assertEqual(self.field1.klass, self.klass)
+        self.assertEqual(self.klass._schema, self.schema)
+        self.assertEqual(self.field1._klass, self.klass)
 
     def test_get_klass(self):
         self.assertEqual(self.schema.get_klass("TestKlass"), self.klass)

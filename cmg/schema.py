@@ -64,7 +64,7 @@ class Schema:
         Link the schema to its classes and fields.
         """
         for klass in self.classes:
-            klass.schema = self
+            klass._schema = self
             klass.link()
 
     def get_klass(self, name: str) -> "Klass":
@@ -143,16 +143,14 @@ class Klass:
 
         description (str): The description of the class.
 
-        schema (Schema): The schema of the class.
-
         fields (List[Field]): The fields in the class.
 
     """
 
     name: str
     description: str
-    schema: Optional[Schema] = None
     fields: List["Field"] = field(default_factory=list)
+    _schema: Optional[Schema] = field(default=None, repr=False, init=False)
 
     def get_include_define(self) -> str:
         """
@@ -284,20 +282,20 @@ class Klass:
         """
         Link the class to its fields and schema.
         """
-        if not self.schema:
+        if not self._schema:
             raise ValueError("Schema is not linked")
         for field in self.fields:
-            field.klass = self
+            field._klass = self
             if field.has_parent():
-                field.parent_klass = self.schema.get_klass(field.type)
-                field.parent_field = self.schema.get_field(field.type, field.parent)  # type: ignore
+                field._parent_klass = self._schema.get_klass(field.type)
+                field._parent_field = self._schema.get_field(field.type, field.parent)  # type: ignore
             elif field.is_child:
                 # Look for opposite field in child klass that has a matching parent
-                child_klass = self.schema.get_klass(field.type)
+                child_klass = self._schema.get_klass(field.type)
                 for child_field in child_klass.fields:
                     if child_field.has_parent() and child_field.type == self.name:
-                        field.child_klass = child_klass
-                        field.child_field = child_field
+                        field._child_klass = child_klass
+                        field._child_field = child_field
                         break
 
     def get_var_name(self) -> str:
@@ -344,8 +342,8 @@ class Klass:
         fields = []
         for field in self.fields:
             if field.has_parent():
-                if field.parent_klass is not None:
-                    fields.extend(field.parent_klass.get_parent_fields())
+                if field._parent_klass is not None:
+                    fields.extend(field._parent_klass.get_parent_fields())
                 fields.append(field)
         return fields
 
@@ -379,8 +377,6 @@ class Field:
 
         example (Any): The example value of the field.
 
-        klass (Optional[Klass]): The class of the field.
-
         default (Optional[Any]): The default value of the field.
 
         parent (Optional[str]): The parent of the field.
@@ -391,30 +387,22 @@ class Field:
 
         is_optional (bool): Whether the field is optional.
 
-        parent_klass (Optional[Klass]): The parent class of the field.
-
-        parent_field (Optional[Field]): The parent field of the field.
-
-        child_klass (Optional[Klass]): The child class of the field.
-
-        child_field (Optional[Field]): The child field of the field.
-
     """
 
     name: str
     description: str
     type: str
     example: Any
-    klass: Optional[Klass] = None
     default: Optional[Any] = None
     parent: Optional[str] = None
     is_child: bool = False
     is_list: bool = False
     is_optional: bool = False
-    parent_klass: Optional[Klass] = None
-    parent_field: Optional["Field"] = None
-    child_klass: Optional[Klass] = None
-    child_field: Optional["Field"] = None
+    _parent_klass: Optional[Klass] = field(default=None, repr=False, init=False)
+    _parent_field: Optional["Field"] = field(default=None, repr=False, init=False)
+    _child_klass: Optional[Klass] = field(default=None, repr=False, init=False)
+    _child_field: Optional["Field"] = field(default=None, repr=False, init=False)
+    _klass: Optional[Klass] = field(default=None, repr=False, init=False)
 
     def has_parent(self) -> bool:
         """
@@ -506,13 +494,13 @@ class Field:
         Raises:
             ValueError: If the class or schema is not linked.
         """
-        if self.klass is None:
+        if self._klass is None:
             raise ValueError("Klass is not linked")
 
-        if self.klass.schema is None:
+        if self._klass._schema is None:
             raise ValueError("Schema is not linked")
 
-        return self.type in [klass.name for klass in self.klass.schema.classes]
+        return self.type in [klass.name for klass in self._klass._schema.classes]
 
     def get_example(self) -> Any:
         """
@@ -522,7 +510,7 @@ class Field:
             Any: The example value.
         """
         example = self.example
-        if self.parent_field is not None:
+        if self._parent_field is not None:
             example = self.to_camel_case()
         elif isinstance(example, str):
             example = f'std::string("{example}")'

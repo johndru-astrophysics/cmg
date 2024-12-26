@@ -17,10 +17,10 @@ namespace {{schema.namespace}}
 {%- for field in klass.fields %}
     {%- if field.has_parent() %}
             object->{{field.to_camel_case()}} = {{field.to_camel_case()}} ;
-        {%- if field.parent_field.is_list %}
-            object->{{field.to_camel_case()}}.lock()->addTo{{field.parent_field.to_camel_case(upper_first=True)}}(object, true);
+        {%- if field._parent_field.is_list %}
+            object->{{field.to_camel_case()}}.lock()->addTo{{field._parent_field.to_camel_case(upper_first=True)}}(object, true);
         {%- else %}
-            object->{{field.to_camel_case()}}.lock()->set{{field.parent_field.to_camel_case(upper_first=True)}}(object);
+            object->{{field.to_camel_case()}}.lock()->set{{field._parent_field.to_camel_case(upper_first=True)}}(object);
         {%- endif %}
     {%- endif %}
 {%- endfor %}
@@ -50,10 +50,10 @@ namespace {{schema.namespace}}
         // Remove from parent field for {{field.to_camel_case()}}
         if (!{{field.to_camel_case()}}.expired())
         {
-        {%- if field.parent_field.is_list %}
-            {{field.to_camel_case()}}.lock()->removeFrom{{field.parent_field.to_camel_case(upper_first=True)}}(getptr());
+        {%- if field._parent_field.is_list %}
+            {{field.to_camel_case()}}.lock()->removeFrom{{field._parent_field.to_camel_case(upper_first=True)}}(getptr());
         {%- else %}
-            {{field.to_camel_case()}}.lock()->set{{field.parent_field.to_camel_case(upper_first=True)}}(nullptr);
+            {{field.to_camel_case()}}.lock()->set{{field._parent_field.to_camel_case(upper_first=True)}}(nullptr);
         {%- endif %}
         }
     {%- endif %}
@@ -63,7 +63,7 @@ namespace {{schema.namespace}}
 
         // Destory child field(s) for {{field.to_camel_case()}}
         {%- if field.is_list %}
-        std::vector<std::shared_ptr<{{field.child_klass.name}}>> toDestroy = {};
+        std::vector<std::shared_ptr<{{field._child_klass.name}}>> toDestroy = {};
         for (auto &item : {{field.to_camel_case()}})
         {
             toDestroy.push_back(item);
@@ -95,32 +95,32 @@ namespace {{schema.namespace}}
         {% else %}
     void {{klass.name}}::set{{field.to_camel_case(upper_first=True)}}({{field.get_cpp_type()}} parent)
     {
-        {%- if field.parent_field.is_list %}
+        {%- if field._parent_field.is_list %}
         // Remove from current parent
         if (!{{field.to_camel_case()}}.expired())
         {
-            {{field.to_camel_case()}}.lock()->removeFrom{{field.parent_field.to_camel_case(upper_first=True)}}(getptr());
+            {{field.to_camel_case()}}.lock()->removeFrom{{field._parent_field.to_camel_case(upper_first=True)}}(getptr());
             {{field.to_camel_case()}}.reset();
         }
 
         // Add to new parent
         if (!parent.expired())
         {
-            parent.lock()->addTo{{field.parent_field.to_camel_case(upper_first=True)}}(getptr(), true);
+            parent.lock()->addTo{{field._parent_field.to_camel_case(upper_first=True)}}(getptr(), true);
             {{field.to_camel_case()}} = parent;
         }
         {%- else %}
         // Remove from current parent
         if (!{{field.to_camel_case()}}.expired())
         {
-            {{field.to_camel_case()}}.lock()->set{{field.parent_field.to_camel_case(upper_first=True)}}(nullptr);
+            {{field.to_camel_case()}}.lock()->set{{field._parent_field.to_camel_case(upper_first=True)}}(nullptr);
             {{field.to_camel_case()}}.reset();
         }
 
         // Add to new parent
         if (!parent.expired())
         {
-            parent.lock()->set{{field.parent_field.to_camel_case(upper_first=True)}}(getptr());
+            parent.lock()->set{{field._parent_field.to_camel_case(upper_first=True)}}(getptr());
             {{field.to_camel_case()}} = parent;
         }
         {%- endif %}
@@ -128,7 +128,7 @@ namespace {{schema.namespace}}
         {% endif %}
     {%- else %}
         {% if field.is_list %}
-            {%- if field.child_field %}
+            {%- if field._child_field %}
     void {{klass.name}}::addTo{{field.to_camel_case(upper_first=True)}}({{field.get_cpp_type(nolist=True)}} item, bool fromChild)
     {
         if (fromChild)
@@ -137,7 +137,7 @@ namespace {{schema.namespace}}
         }
         else
         {
-            item->set{{field.child_field.to_camel_case(upper_first=True)}}(getptr());
+            item->set{{field._child_field.to_camel_case(upper_first=True)}}(getptr());
         }
     
     }
@@ -150,7 +150,7 @@ namespace {{schema.namespace}}
         }
         else
         {
-            item->reset{{field.child_field.to_camel_case(upper_first=True)}}();
+            item->reset{{field._child_field.to_camel_case(upper_first=True)}}();
         }
     
     }
@@ -180,10 +180,10 @@ namespace {{schema.namespace}}
     {
         if (!{{field.to_camel_case()}}.expired())
         {
-    {%- if field.parent_field.is_list %}
-            {{field.to_camel_case()}}.lock()->removeFrom{{field.parent_field.to_camel_case(upper_first=True)}}(getptr(), true);
+    {%- if field._parent_field.is_list %}
+            {{field.to_camel_case()}}.lock()->removeFrom{{field._parent_field.to_camel_case(upper_first=True)}}(getptr(), true);
     {%- else %}
-            {{field.to_camel_case()}}.lock()->set{{field.parent_field.to_camel_case(upper_first=True)}}(nullptr);
+            {{field.to_camel_case()}}.lock()->set{{field._parent_field.to_camel_case(upper_first=True)}}(nullptr);
     {%- endif %}
             {{field.to_camel_case()}}.reset();
         }

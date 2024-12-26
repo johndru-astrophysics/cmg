@@ -4,7 +4,7 @@ import unittest
 
 from cmg.generator import generate
 from cmg.schema import Klass
-from examples import eda
+from examples import eda, solar_system
 
 TEST_RUN_DIR = "generated"
 
@@ -17,4 +17,8 @@ class TestExamples(unittest.TestCase):
 
     def test_eda(self):
         schema = eda.schema
+        generate(schema, TEST_RUN_DIR)
+
+    def test_solar_system(self):
+        schema = solar_system.schema
         generate(schema, TEST_RUN_DIR)
