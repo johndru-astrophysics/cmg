@@ -22,7 +22,7 @@ Please see the example schemas in the `examples` directory.
 
 ## API Documentation
 
-Full API documentation is available [here TBD](TBD).
+[Full API documentation is available here](https://johndru-astrophysics.github.io/cmg).
 
 
 
