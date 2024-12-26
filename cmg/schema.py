@@ -45,8 +45,11 @@ class Schema:
 
     Attributes:
         name (str): The name of the schema.
+
         description (str): The description of the schema.
+
         namespace (str): The namespace of the schema.
+
         classes (List[Klass]): The classes in the schema.
     """
 
@@ -137,9 +140,13 @@ class Klass:
 
     Attributes:
         name (str): The name of the class.
+
         description (str): The description of the class.
+
         schema (Schema): The schema of the class.
+
         fields (List[Field]): The fields in the class.
+
     """
 
     name: str
@@ -365,19 +372,33 @@ class Field:
 
     Attributes:
         name (str): The name of the field.
+
         description (str): The description of the field.
+
         type (str): The type of the field.
+
         example (Any): The example value of the field.
+
         klass (Optional[Klass]): The class of the field.
+
         default (Optional[Any]): The default value of the field.
+
         parent (Optional[str]): The parent of the field.
+
         is_child (bool): Whether the field is a child.
+
         is_list (bool): Whether the field is a list.
+
         is_optional (bool): Whether the field is optional.
+
         parent_klass (Optional[Klass]): The parent class of the field.
+
         parent_field (Optional[Field]): The parent field of the field.
+
         child_klass (Optional[Klass]): The child class of the field.
+
         child_field (Optional[Field]): The child field of the field.
+
     """
 
     name: str
