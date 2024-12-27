@@ -95,13 +95,13 @@ namespace {{schema.namespace}}
             @brief Add an item to the list of {{field.to_camel_case()}}
             @param item The item to add
         */
-        void addTo{{field.to_camel_case(upper_first=True)}}({{field.get_cpp_type(nolist=True)}} item);
+        void addTo{{field.to_camel_case(upper_first=True)}}({{field.get_cpp_type(nolist=True)}} item, bool fromChild = false);
         
         /**
             @brief Remove an item from the list of {{field.to_camel_case()}}
             @param item The item to remove
         */
-        void removeFrom{{field.to_camel_case(upper_first=True)}}({{field.get_cpp_type(nolist=True)}} item);
+        void removeFrom{{field.to_camel_case(upper_first=True)}}({{field.get_cpp_type(nolist=True)}} item, bool fromChild = false);
         {%- endif %}
     {% else %}
         /**

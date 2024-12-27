@@ -206,7 +206,7 @@ class Klass:
         for field in self.fields:
             if field.has_parent() and not parents:
                 continue
-            if not field.has_default() and not field.is_list and not field.is_optional:
+            if not field.has_default() and not field.is_child and not field.is_optional:
                 init_fields.append(field)
         return init_fields
 
