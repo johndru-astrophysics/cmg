@@ -37,6 +37,7 @@ jobs:
           poetry build
           
   publish:
+    needs: [release-build]
     runs-on: ubuntu-latest
     
     permissions:
