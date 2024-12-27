@@ -23,6 +23,7 @@ class TestSchema(unittest.TestCase):
             classes=[self.klass],
         )
         self.schema.link()
+        self.schema.set_output_dir("output")
 
     def test_to_snake_case(self):
         self.assertEqual(to_snake_case("camelCase"), "camel_case")
@@ -52,7 +53,10 @@ class TestSchema(unittest.TestCase):
         self.assertEqual(self.schema.get_cmakelists_src(), '"test_klass.cpp"')
 
     def test_get_lcov_src(self):
-        self.assertEqual(self.schema.get_lcov_src(), "test_klass.cpp")
+        self.assertEqual(
+            self.schema.get_lcov_src(),
+            '"c:\\Users\\john\\Projects\\cmg\\output\\test_klass.cpp"',
+        )
 
     def test_get_test_includes(self):
         self.assertEqual(self.schema.get_test_includes(), ['#include "test_klass.hpp"'])

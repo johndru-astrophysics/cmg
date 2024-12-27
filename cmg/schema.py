@@ -1,6 +1,7 @@
 """A schema used to define the structure of the data in a model."""
 
 from dataclasses import dataclass, field
+import os
 from typing import Any, List, Optional
 
 
@@ -56,8 +57,17 @@ class Schema:
     name: str
     description: str
     namespace: str
-
     classes: List["Klass"] = field(default_factory=list)
+    _output_dir: str = field(default=".", repr=False, init=False)
+
+    def set_output_dir(self, output_dir: str) -> None:
+        """
+        Set the output directory for the schema.
+
+        Args:
+            output_dir (str): The output directory.
+        """
+        self._output_dir = os.path.abspath(output_dir)
 
     def link(self) -> None:
         """
@@ -121,7 +131,16 @@ class Schema:
         Returns:
             str: The source files.
         """
-        return " ".join([f"{klass.to_snake_case()}.cpp" for klass in self.classes])
+        sources = [
+            "/".join(
+                [
+                    self._output_dir.replace(os.path.sep, "/").replace("c:", "", 1),
+                    f"{klass.to_snake_case()}.cpp",
+                ]
+            )
+            for klass in self.classes
+        ]
+        return " ".join(sources)
 
     def get_test_includes(self) -> List[str]:
         """

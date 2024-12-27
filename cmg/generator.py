@@ -25,6 +25,7 @@ def generate(schema: Schema, output_dir: str) -> None:
 
     # Link the schema
     schema.link()
+    schema.set_output_dir(output_dir)
 
     # Build the C++ code
 
