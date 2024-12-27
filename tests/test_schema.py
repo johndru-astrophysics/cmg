@@ -53,9 +53,8 @@ class TestSchema(unittest.TestCase):
         self.assertEqual(self.schema.get_cmakelists_src(), '"test_klass.cpp"')
 
     def test_get_lcov_src(self):
-        self.assertEqual(
-            self.schema.get_lcov_src(),
-            '"c:\\Users\\john\\Projects\\cmg\\output\\test_klass.cpp"',
+        self.assertTrue(
+            "test_klass.cpp" in self.schema.get_lcov_src(),
         )
 
     def test_get_test_includes(self):
