@@ -7,10 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-22.04, windows-2022, macos-12]
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -33,48 +30,23 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: build-${{ matrix.os }}-${{ github.ref_name }}
+        name: build-${{ github.ref_name }}
         path: dist/
 
   publish:
     needs: build
     runs-on: ubuntu-22.04
     steps:
-    - name: Download artifacts for Ubuntu
+    - name: Download artifacts
       uses: actions/download-artifact@v2
       with:
-        name: build-ubuntu-22.04-${{ github.ref_name }}
+        name: build-${{ github.ref_name }}
         path: dist/
 
-    - name: Download artifacts for Windows
-      uses: actions/download-artifact@v2
-      with:
-        name: build-windows-2022-${{ github.ref_name }}
-        path: dist/
-
-    - name: Download artifacts for macOS
-      uses: actions/download-artifact@v2
-      with:
-        name: build-macos-12-${{ github.ref_name }}
-        path: dist/
-
-    - name: Publish Ubuntu artifacts to PyPI
+    - name: Publish artifacts to PyPI
       uses: pypa/gh-action-pypi-publish@v1.4.2
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
         packages_directory: dist
 
-    - name: Publish Windows artifacts to PyPI
-      uses: pypa/gh-action-pypi-publish@v1.4.2
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
-        packages_directory: dist
-
-    - name: Publish macOS artifacts to PyPI
-      uses: pypa/gh-action-pypi-publish@v1.4.2
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
-        packages_directory: dist
