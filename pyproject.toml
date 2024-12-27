@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cmg"
-version = "0.1.1"
+version = "0.1.2"
 description = "C++11 model generation"
 authors = ["John Dru <john@muopia.com>"]
 readme = "README.md"
@@ -21,5 +21,5 @@ click = "^8.1.8"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[project.scripts]
+[tool.poetry.scripts]
 cmg = "cmg.cli:main"
