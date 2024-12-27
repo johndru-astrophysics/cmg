@@ -34,7 +34,7 @@ Will create a directory called `solar_system` containing the following files:
 
 ```
 solar_system/
-    CMakeLists.txt         - Example CMakeLists.txt to create a library and buld the tests
+    CMakeLists.txt         - Example CMakeLists.txt to create a library and build the tests
     planet.cpp             - Planet class implementation
     planet.hpp             - Planet class header
     root.cpp               - Root class implementation
@@ -48,7 +48,7 @@ solar_system/
 
 You can use the `CMakeLists.txt` file as a starting point for your own build.
 
-> NOTE: the whole output directory will be removed and re-created everytime you run `cmg`.
+> NOTE: the whole output directory will be removed and re-created every time you run `cmg`.
 
 ## Schema Structure
 
@@ -108,11 +108,11 @@ sun.lock()->getName(); // Returns "Renamed"
 
 ### Destroy
 
-Obejcts are usually destroyed automatically when their shared_ptr count is zero. But if a parent has a reference to a child, then it will never be deleted from memory. So, calling `destroy()` on a parent instance will also destroy it's children. The parent shared_ptr will still be in memory until the variable referencing it goes out of scope.
+Objects are usually destroyed automatically when their shared_ptr count is zero. But if a parent has a reference to a child, then it will never be deleted from memory. So, calling `destroy()` on a parent instance will also destroy its children. The parent shared_ptr will still be in memory until the variable referencing it goes out of scope.
 
 ### Checking references to objects have not expired
 
-In the solar_system example, a Sun is owned by the Root class, but it is reference by the SolarSystem class.
+In the solar_system example, a Sun is owned by the Root class, but it is referenced by the SolarSystem class.
 
 You can check if a reference to another object is not expired before using it, like this:
 
@@ -134,7 +134,7 @@ std::cout << earthPtr.getName() << std::endl;
 std::cout << earthPtr.getMass() << std::endl;
 ```
 
-Use this to lock a weak object until it goes out of scope. This saves you from locking the object everytime you want to call one of it's functions.
+Use this to lock a weak object until it goes out of scope. This saves you from locking the object every time you want to call one of its functions.
 
 ## Help and bug reporting
 
