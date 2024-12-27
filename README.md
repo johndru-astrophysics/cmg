@@ -14,7 +14,7 @@ The schema consists of a set of classes (`Klass`) which contain fields (`Field`)
 A tree structure can be created using parent-child relationships (solid lines).
 Then references can be created between classes in the DAG hierarchy (dotted lines).
 
-![schema](assets/cmg.drawio.png)
+![schema](https://github.com/johndru-astrophysics/cmg/blob/main/assets/cmg.drawio.png?raw=true)
 
 ## Examples
 
