@@ -73,6 +73,7 @@ namespace {{schema.namespace}}
             item->destroy();
         }
         {{field.to_camel_case()}}.clear();
+        {{field.to_camel_case()}}.shrink_to_fit();
         {%- else %}
         if ({{field.to_camel_case()}} != nullptr)
         {
