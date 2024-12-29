@@ -42,13 +42,13 @@ namespace {{schema.namespace}}
         }
     }
 
-    void {{klass.name}}::destroy()
+    void {{klass.name}}::destroy(bool fromParent)
     {
 {%- for field in klass.get_ordered_fields() %}
     {%- if field.has_parent() %}
 
         // Remove from parent field for {{field.to_camel_case()}}
-        if (!{{field.to_camel_case()}}.expired())
+        if (!fromParent && !{{field.to_camel_case()}}.expired())
         {
         {%- if field._parent_field.is_list %}
             {{field.to_camel_case()}}.lock()->removeFrom{{field._parent_field.to_camel_case(upper_first=True)}}(getptr());
@@ -70,15 +70,16 @@ namespace {{schema.namespace}}
         }
         for (auto &item : toDestroy)
         {
-            item->destroy();
+            item->destroy(true);
         }
         {{field.to_camel_case()}}.clear();
         {{field.to_camel_case()}}.shrink_to_fit();
         {%- else %}
         if ({{field.to_camel_case()}} != nullptr)
         {
-            {{field.to_camel_case()}}->destroy();
+            {{field.to_camel_case()}}->destroy(true);
         }
+        {{field.to_camel_case()}} = nullptr;
         {%- endif %}
     {%- endif %}
 {%- endfor %}
