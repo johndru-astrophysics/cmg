@@ -4,10 +4,18 @@ cmg package
 Submodules
 ----------
 
-cmg.cli module
---------------
+cmg.schema module
+-----------------
 
-.. automodule:: cmg.cli
+.. automodule:: cmg.schema
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+cmg.generator module
+--------------------
+
+.. automodule:: cmg.validation
    :members:
    :undoc-members:
    :show-inheritance:
@@ -20,10 +28,10 @@ cmg.generator module
    :undoc-members:
    :show-inheritance:
 
-cmg.schema module
------------------
+cmg.cli module
+--------------
 
-.. automodule:: cmg.schema
+.. automodule:: cmg.cli
    :members:
    :undoc-members:
    :show-inheritance:

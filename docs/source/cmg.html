@@ -44,12 +44,6 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">cmg package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-cmg.cli">cmg.cli module</a></li>
-<li><a class="reference internal" href="#module-cmg.generator">cmg.generator module</a><ul>
-<li><a class="reference internal" href="#cmg.generator.generate"><code class="docutils literal notranslate"><span class="pre">generate()</span></code></a></li>
-<li><a class="reference internal" href="#cmg.generator.schema_loader"><code class="docutils literal notranslate"><span class="pre">schema_loader()</span></code></a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#module-cmg.schema">cmg.schema module</a><ul>
 <li><a class="reference internal" href="#cmg.schema.Field"><code class="docutils literal notranslate"><span class="pre">Field</span></code></a><ul>
 <li><a class="reference internal" href="#cmg.schema.Field.default"><code class="docutils literal notranslate"><span class="pre">Field.default</span></code></a></li>
@@ -109,6 +103,58 @@
 <li><a class="reference internal" href="#cmg.schema.to_snake_case"><code class="docutils literal notranslate"><span class="pre">to_snake_case()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#module-cmg.validation">cmg.generator module</a><ul>
+<li><a class="reference internal" href="#cmg.validation.BaseRule"><code class="docutils literal notranslate"><span class="pre">BaseRule</span></code></a><ul>
+<li><a class="reference internal" href="#cmg.validation.BaseRule.description"><code class="docutils literal notranslate"><span class="pre">BaseRule.description</span></code></a></li>
+<li><a class="reference internal" href="#cmg.validation.BaseRule.name"><code class="docutils literal notranslate"><span class="pre">BaseRule.name</span></code></a></li>
+<li><a class="reference internal" href="#cmg.validation.BaseRule.validate"><code class="docutils literal notranslate"><span class="pre">BaseRule.validate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cmg.validation.ChildHasParentRule"><code class="docutils literal notranslate"><span class="pre">ChildHasParentRule</span></code></a><ul>
+<li><a class="reference internal" href="#cmg.validation.ChildHasParentRule.validate"><code class="docutils literal notranslate"><span class="pre">ChildHasParentRule.validate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cmg.validation.FieldDefaultMatchesTypeRule"><code class="docutils literal notranslate"><span class="pre">FieldDefaultMatchesTypeRule</span></code></a><ul>
+<li><a class="reference internal" href="#cmg.validation.FieldDefaultMatchesTypeRule.validate"><code class="docutils literal notranslate"><span class="pre">FieldDefaultMatchesTypeRule.validate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cmg.validation.FieldExampleMatchesTypeRule"><code class="docutils literal notranslate"><span class="pre">FieldExampleMatchesTypeRule</span></code></a><ul>
+<li><a class="reference internal" href="#cmg.validation.FieldExampleMatchesTypeRule.validate"><code class="docutils literal notranslate"><span class="pre">FieldExampleMatchesTypeRule.validate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cmg.validation.FieldNamesUniqueRule"><code class="docutils literal notranslate"><span class="pre">FieldNamesUniqueRule</span></code></a><ul>
+<li><a class="reference internal" href="#cmg.validation.FieldNamesUniqueRule.validate"><code class="docutils literal notranslate"><span class="pre">FieldNamesUniqueRule.validate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cmg.validation.FieldsHaveValidTypeRules"><code class="docutils literal notranslate"><span class="pre">FieldsHaveValidTypeRules</span></code></a><ul>
+<li><a class="reference internal" href="#cmg.validation.FieldsHaveValidTypeRules.validate"><code class="docutils literal notranslate"><span class="pre">FieldsHaveValidTypeRules.validate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cmg.validation.KlassNamesUniqueRule"><code class="docutils literal notranslate"><span class="pre">KlassNamesUniqueRule</span></code></a><ul>
+<li><a class="reference internal" href="#cmg.validation.KlassNamesUniqueRule.validate"><code class="docutils literal notranslate"><span class="pre">KlassNamesUniqueRule.validate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cmg.validation.ParentFieldExistsRule"><code class="docutils literal notranslate"><span class="pre">ParentFieldExistsRule</span></code></a><ul>
+<li><a class="reference internal" href="#cmg.validation.ParentFieldExistsRule.validate"><code class="docutils literal notranslate"><span class="pre">ParentFieldExistsRule.validate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cmg.validation.RuleError"><code class="docutils literal notranslate"><span class="pre">RuleError</span></code></a><ul>
+<li><a class="reference internal" href="#cmg.validation.RuleError.message"><code class="docutils literal notranslate"><span class="pre">RuleError.message</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cmg.validation.RuleSet"><code class="docutils literal notranslate"><span class="pre">RuleSet</span></code></a><ul>
+<li><a class="reference internal" href="#cmg.validation.RuleSet.validate"><code class="docutils literal notranslate"><span class="pre">RuleSet.validate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cmg.validation.SchemaRuleSet"><code class="docutils literal notranslate"><span class="pre">SchemaRuleSet</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">cmg.generator module</a><ul>
+<li><a class="reference internal" href="#cmg.generator.generate"><code class="docutils literal notranslate"><span class="pre">generate()</span></code></a></li>
+<li><a class="reference internal" href="#cmg.generator.schema_loader"><code class="docutils literal notranslate"><span class="pre">schema_loader()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-cmg.cli">cmg.cli module</a></li>
 <li><a class="reference internal" href="#module-cmg">Module contents</a></li>
 </ul>
 </li>
@@ -142,25 +188,6 @@
 <h1>cmg package<a class="headerlink" href="#cmg-package" title="Link to this heading"></a></h1>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
-</section>
-<section id="module-cmg.cli">
-<span id="cmg-cli-module"></span><h2>cmg.cli module<a class="headerlink" href="#module-cmg.cli" title="Link to this heading"></a></h2>
-</section>
-<section id="module-cmg.generator">
-<span id="cmg-generator-module"></span><h2>cmg.generator module<a class="headerlink" href="#module-cmg.generator" title="Link to this heading"></a></h2>
-<p>A generator used to generate C++ based on a schema.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="cmg.generator.generate">
-<span class="sig-prename descclassname"><span class="pre">cmg.generator.</span></span><span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cmg.schema.Schema" title="cmg.schema.Schema"><span class="pre">Schema</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Logger</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#cmg.generator.generate" title="Link to this definition"></a></dt>
-<dd><p>Generate C++ code based on the schema.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cmg.generator.schema_loader">
-<span class="sig-prename descclassname"><span class="pre">cmg.generator.</span></span><span class="sig-name descname"><span class="pre">schema_loader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cmg.schema.Schema" title="cmg.schema.Schema"><span class="pre">Schema</span></a></span></span><a class="headerlink" href="#cmg.generator.schema_loader" title="Link to this definition"></a></dt>
-<dd><p>Load the schema module.</p>
-</dd></dl>
-
 </section>
 <section id="module-cmg.schema">
 <span id="cmg-schema-module"></span><h2>cmg.schema module<a class="headerlink" href="#module-cmg.schema" title="Link to this heading"></a></h2>
@@ -618,6 +645,281 @@ upper_first (bool): Whether to capitalize the first letter.</p>
 </dl>
 </dd></dl>
 
+</section>
+<section id="module-cmg.validation">
+<span id="cmg-generator-module"></span><h2>cmg.generator module<a class="headerlink" href="#module-cmg.validation" title="Link to this heading"></a></h2>
+<p>Validates a schema against a set of rules</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cmg.validation.BaseRule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.validation.</span></span><span class="sig-name descname"><span class="pre">BaseRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.validation.BaseRule" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Base class for all rules</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>name: The name of the rule
+description: The description of the rule</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmg.validation.BaseRule.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#cmg.validation.BaseRule.description" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmg.validation.BaseRule.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#cmg.validation.BaseRule.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmg.validation.BaseRule.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cmg.schema.Schema" title="cmg.schema.Schema"><span class="pre">Schema</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cmg.validation.RuleError" title="cmg.validation.RuleError"><span class="pre">RuleError</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cmg.validation.BaseRule.validate" title="Link to this definition"></a></dt>
+<dd><p>Validates a schema against a rule</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>schema: The schema to validate</p>
+</dd>
+<dt>Returns:</dt><dd><p>A list of errors</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cmg.validation.ChildHasParentRule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.validation.</span></span><span class="sig-name descname"><span class="pre">ChildHasParentRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.validation.ChildHasParentRule" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cmg.validation.BaseRule" title="cmg.validation.BaseRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRule</span></code></a></p>
+<p>Rule that checks if the child has a parent</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>name: The name of the rule
+description: The description of the rule</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cmg.validation.ChildHasParentRule.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cmg.validation.RuleError" title="cmg.validation.RuleError"><span class="pre">RuleError</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cmg.validation.ChildHasParentRule.validate" title="Link to this definition"></a></dt>
+<dd><p>Validates a schema against a rule</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>schema: The schema to validate</p>
+</dd>
+<dt>Returns:</dt><dd><p>A list of errors</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cmg.validation.FieldDefaultMatchesTypeRule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.validation.</span></span><span class="sig-name descname"><span class="pre">FieldDefaultMatchesTypeRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.validation.FieldDefaultMatchesTypeRule" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cmg.validation.BaseRule" title="cmg.validation.BaseRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRule</span></code></a></p>
+<p>Rule that checks if the default value matches the field type</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>name: The name of the rule
+description: The description of the rule</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cmg.validation.FieldDefaultMatchesTypeRule.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cmg.validation.RuleError" title="cmg.validation.RuleError"><span class="pre">RuleError</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cmg.validation.FieldDefaultMatchesTypeRule.validate" title="Link to this definition"></a></dt>
+<dd><p>Validates a schema against a rule</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>schema: The schema to validate</p>
+</dd>
+<dt>Returns:</dt><dd><p>A list of errors</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cmg.validation.FieldExampleMatchesTypeRule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.validation.</span></span><span class="sig-name descname"><span class="pre">FieldExampleMatchesTypeRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.validation.FieldExampleMatchesTypeRule" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cmg.validation.BaseRule" title="cmg.validation.BaseRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRule</span></code></a></p>
+<p>Rule that checks if the example matches the field type</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>name: The name of the rule
+description: The description of the rule</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cmg.validation.FieldExampleMatchesTypeRule.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cmg.validation.RuleError" title="cmg.validation.RuleError"><span class="pre">RuleError</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cmg.validation.FieldExampleMatchesTypeRule.validate" title="Link to this definition"></a></dt>
+<dd><p>Validates a schema against a rule</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>schema: The schema to validate</p>
+</dd>
+<dt>Returns:</dt><dd><p>A list of errors</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cmg.validation.FieldNamesUniqueRule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.validation.</span></span><span class="sig-name descname"><span class="pre">FieldNamesUniqueRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.validation.FieldNamesUniqueRule" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cmg.validation.BaseRule" title="cmg.validation.BaseRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRule</span></code></a></p>
+<p>Rule that checks if all field names are unique</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>name: The name of the rule
+description: The description of the rule</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cmg.validation.FieldNamesUniqueRule.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cmg.validation.RuleError" title="cmg.validation.RuleError"><span class="pre">RuleError</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cmg.validation.FieldNamesUniqueRule.validate" title="Link to this definition"></a></dt>
+<dd><p>Validates a schema against a rule</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>schema: The schema to validate</p>
+</dd>
+<dt>Returns:</dt><dd><p>A list of errors</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cmg.validation.FieldsHaveValidTypeRules">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.validation.</span></span><span class="sig-name descname"><span class="pre">FieldsHaveValidTypeRules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.validation.FieldsHaveValidTypeRules" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cmg.validation.BaseRule" title="cmg.validation.BaseRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRule</span></code></a></p>
+<p>Rule that checks if all fields have a valid type</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>name: The name of the rule
+description: The description of the rule</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cmg.validation.FieldsHaveValidTypeRules.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cmg.validation.RuleError" title="cmg.validation.RuleError"><span class="pre">RuleError</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cmg.validation.FieldsHaveValidTypeRules.validate" title="Link to this definition"></a></dt>
+<dd><p>Validates a schema against a rule</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>schema: The schema to validate</p>
+</dd>
+<dt>Returns:</dt><dd><p>A list of errors</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cmg.validation.KlassNamesUniqueRule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.validation.</span></span><span class="sig-name descname"><span class="pre">KlassNamesUniqueRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.validation.KlassNamesUniqueRule" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cmg.validation.BaseRule" title="cmg.validation.BaseRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRule</span></code></a></p>
+<p>Rule that checks if all class names are unique</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>name: The name of the rule
+description: The description of the rule</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cmg.validation.KlassNamesUniqueRule.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cmg.validation.RuleError" title="cmg.validation.RuleError"><span class="pre">RuleError</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cmg.validation.KlassNamesUniqueRule.validate" title="Link to this definition"></a></dt>
+<dd><p>Validates a schema against a rule</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>schema: The schema to validate</p>
+</dd>
+<dt>Returns:</dt><dd><p>A list of errors</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cmg.validation.ParentFieldExistsRule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.validation.</span></span><span class="sig-name descname"><span class="pre">ParentFieldExistsRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.validation.ParentFieldExistsRule" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cmg.validation.BaseRule" title="cmg.validation.BaseRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRule</span></code></a></p>
+<p>Rule that checks if the parent field exists</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>name: The name of the rule
+description: The description of the rule</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cmg.validation.ParentFieldExistsRule.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cmg.validation.RuleError" title="cmg.validation.RuleError"><span class="pre">RuleError</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cmg.validation.ParentFieldExistsRule.validate" title="Link to this definition"></a></dt>
+<dd><p>Validates a schema against a rule</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>schema: The schema to validate</p>
+</dd>
+<dt>Returns:</dt><dd><p>A list of errors</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cmg.validation.RuleError">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.validation.</span></span><span class="sig-name descname"><span class="pre">RuleError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.validation.RuleError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a rule error</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>message: The error message</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmg.validation.RuleError.message">
+<span class="sig-name descname"><span class="pre">message</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#cmg.validation.RuleError.message" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cmg.validation.RuleSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.validation.</span></span><span class="sig-name descname"><span class="pre">RuleSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rules</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cmg.validation.BaseRule" title="cmg.validation.BaseRule"><span class="pre">BaseRule</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.validation.RuleSet" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a set of rules</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>rules: The list of rules</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cmg.validation.RuleSet.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cmg.validation.RuleError" title="cmg.validation.RuleError"><span class="pre">RuleError</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cmg.validation.RuleSet.validate" title="Link to this definition"></a></dt>
+<dd><p>Validates a schema against a set of rules</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>schema: The schema to validate</p>
+</dd>
+<dt>Returns:</dt><dd><p>A list of errors</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cmg.validation.SchemaRuleSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.validation.</span></span><span class="sig-name descname"><span class="pre">SchemaRuleSet</span></span><a class="headerlink" href="#cmg.validation.SchemaRuleSet" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cmg.validation.RuleSet" title="cmg.validation.RuleSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">RuleSet</span></code></a></p>
+<p>Rule set for schema validation</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>rules: The list of rules</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="id1">
+<h2>cmg.generator module<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p id="module-cmg.generator">A generator used to generate C++ based on a schema.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="cmg.generator.generate">
+<span class="sig-prename descclassname"><span class="pre">cmg.generator.</span></span><span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cmg.schema.Schema" title="cmg.schema.Schema"><span class="pre">Schema</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Logger</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#cmg.generator.generate" title="Link to this definition"></a></dt>
+<dd><p>Generate C++ code based on the schema.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cmg.generator.schema_loader">
+<span class="sig-prename descclassname"><span class="pre">cmg.generator.</span></span><span class="sig-name descname"><span class="pre">schema_loader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cmg.schema.Schema" title="cmg.schema.Schema"><span class="pre">Schema</span></a></span></span><a class="headerlink" href="#cmg.generator.schema_loader" title="Link to this definition"></a></dt>
+<dd><p>Load the schema module.</p>
+</dd></dl>
+
+</section>
+<section id="module-cmg.cli">
+<span id="cmg-cli-module"></span><h2>cmg.cli module<a class="headerlink" href="#module-cmg.cli" title="Link to this heading"></a></h2>
 </section>
 <section id="module-cmg">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cmg" title="Link to this heading"></a></h2>

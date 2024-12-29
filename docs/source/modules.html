@@ -75,12 +75,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cmg.html">cmg package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cmg.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cmg.html#module-cmg.cli">cmg.cli module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cmg.html#module-cmg.generator">cmg.generator module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.generator.generate"><code class="docutils literal notranslate"><span class="pre">generate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.generator.schema_loader"><code class="docutils literal notranslate"><span class="pre">schema_loader()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="cmg.html#module-cmg.schema">cmg.schema module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.schema.Field"><code class="docutils literal notranslate"><span class="pre">Field</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cmg.html#cmg.schema.Field.default"><code class="docutils literal notranslate"><span class="pre">Field.default</span></code></a></li>
@@ -140,6 +134,58 @@
 <li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.schema.to_snake_case"><code class="docutils literal notranslate"><span class="pre">to_snake_case()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="cmg.html#module-cmg.validation">cmg.generator module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.validation.BaseRule"><code class="docutils literal notranslate"><span class="pre">BaseRule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cmg.html#cmg.validation.BaseRule.description"><code class="docutils literal notranslate"><span class="pre">BaseRule.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cmg.html#cmg.validation.BaseRule.name"><code class="docutils literal notranslate"><span class="pre">BaseRule.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cmg.html#cmg.validation.BaseRule.validate"><code class="docutils literal notranslate"><span class="pre">BaseRule.validate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.validation.ChildHasParentRule"><code class="docutils literal notranslate"><span class="pre">ChildHasParentRule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cmg.html#cmg.validation.ChildHasParentRule.validate"><code class="docutils literal notranslate"><span class="pre">ChildHasParentRule.validate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.validation.FieldDefaultMatchesTypeRule"><code class="docutils literal notranslate"><span class="pre">FieldDefaultMatchesTypeRule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cmg.html#cmg.validation.FieldDefaultMatchesTypeRule.validate"><code class="docutils literal notranslate"><span class="pre">FieldDefaultMatchesTypeRule.validate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.validation.FieldExampleMatchesTypeRule"><code class="docutils literal notranslate"><span class="pre">FieldExampleMatchesTypeRule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cmg.html#cmg.validation.FieldExampleMatchesTypeRule.validate"><code class="docutils literal notranslate"><span class="pre">FieldExampleMatchesTypeRule.validate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.validation.FieldNamesUniqueRule"><code class="docutils literal notranslate"><span class="pre">FieldNamesUniqueRule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cmg.html#cmg.validation.FieldNamesUniqueRule.validate"><code class="docutils literal notranslate"><span class="pre">FieldNamesUniqueRule.validate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.validation.FieldsHaveValidTypeRules"><code class="docutils literal notranslate"><span class="pre">FieldsHaveValidTypeRules</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cmg.html#cmg.validation.FieldsHaveValidTypeRules.validate"><code class="docutils literal notranslate"><span class="pre">FieldsHaveValidTypeRules.validate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.validation.KlassNamesUniqueRule"><code class="docutils literal notranslate"><span class="pre">KlassNamesUniqueRule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cmg.html#cmg.validation.KlassNamesUniqueRule.validate"><code class="docutils literal notranslate"><span class="pre">KlassNamesUniqueRule.validate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.validation.ParentFieldExistsRule"><code class="docutils literal notranslate"><span class="pre">ParentFieldExistsRule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cmg.html#cmg.validation.ParentFieldExistsRule.validate"><code class="docutils literal notranslate"><span class="pre">ParentFieldExistsRule.validate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.validation.RuleError"><code class="docutils literal notranslate"><span class="pre">RuleError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cmg.html#cmg.validation.RuleError.message"><code class="docutils literal notranslate"><span class="pre">RuleError.message</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.validation.RuleSet"><code class="docutils literal notranslate"><span class="pre">RuleSet</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cmg.html#cmg.validation.RuleSet.validate"><code class="docutils literal notranslate"><span class="pre">RuleSet.validate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.validation.SchemaRuleSet"><code class="docutils literal notranslate"><span class="pre">SchemaRuleSet</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cmg.html#id1">cmg.generator module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.generator.generate"><code class="docutils literal notranslate"><span class="pre">generate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmg.html#cmg.generator.schema_loader"><code class="docutils literal notranslate"><span class="pre">schema_loader()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cmg.html#module-cmg.cli">cmg.cli module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cmg.html#module-cmg">Module contents</a></li>
 </ul>
 </li>
