@@ -17,7 +17,6 @@ schema = Schema(
                     type="SolarSystem",
                     is_list=True,
                     is_child=True,
-                    example=[],
                 ),
             ],
         ),
@@ -30,7 +29,6 @@ schema = Schema(
                     description="The root object",
                     type="Root",
                     parent="solar_systems",
-                    example=None,
                 ),
                 Field(
                     name="name",
@@ -51,7 +49,6 @@ schema = Schema(
                     type="Planet",
                     is_child=True,
                     is_list=True,
-                    example=[],
                 ),
                 Field(
                     name="star",
@@ -59,7 +56,6 @@ schema = Schema(
                     type="Star",
                     is_child=True,
                     is_list=False,
-                    example=None,
                 ),
             ],
         ),
@@ -72,7 +68,6 @@ schema = Schema(
                     description="The solar system the planet belongs to",
                     type="SolarSystem",
                     parent="planets",
-                    example=None,
                 ),
                 Field(
                     name="name",
@@ -99,7 +94,6 @@ schema = Schema(
                     description="The star the planet orbits",
                     type="Star",
                     is_optional=True,
-                    example=None,
                 ),
             ],
         ),
@@ -112,7 +106,6 @@ schema = Schema(
                     description="The solar system the star belongs to",
                     type="SolarSystem",
                     parent="star",
-                    example=None,
                 ),
                 Field(
                     name="name",

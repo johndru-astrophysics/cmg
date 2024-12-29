@@ -1,3 +1,4 @@
+import logging
 import os
 import shutil
 import unittest
@@ -17,8 +18,8 @@ class TestExamples(unittest.TestCase):
 
     def test_eda(self):
         schema = eda.schema
-        generate(schema, TEST_RUN_DIR)
+        generate(schema, TEST_RUN_DIR, logging.getLogger("test"))
 
     def test_solar_system(self):
         schema = solar_system.schema
-        generate(schema, TEST_RUN_DIR)
+        generate(schema, TEST_RUN_DIR, logging.getLogger("test"))

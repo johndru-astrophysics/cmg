@@ -23,10 +23,15 @@ def cli(schema, output):
         level=logging.INFO,
         format="%(levelname)s: %(message)s",
     )
-    logger = logging.getLogger("cmg")
+    logger: logging.Logger = logging.getLogger("cmg")
     logger.info(f"Generating code from schema {schema} to output directory {output}")
-    generator.generate(generator.schema_loader(schema), output)
-    logger.info("Code generation complete.")
+    exit_code = generator.generate(generator.schema_loader(schema), output, logger)
+    if exit_code != 0:
+        logger.error("Code generation failed.")
+    else:
+        logger.info("Code generation complete.")
+
+    exit(exit_code)
 
 
 if __name__ == "__main__":

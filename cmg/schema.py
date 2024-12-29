@@ -411,7 +411,7 @@ class Field:
     name: str
     description: str
     type: str
-    example: Any
+    example: Optional[Any] = None
     default: Optional[Any] = None
     parent: Optional[str] = None
     is_child: bool = False
