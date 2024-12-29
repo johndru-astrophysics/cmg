@@ -57,7 +57,7 @@ namespace {{schema.namespace}}
         /**
             @brief Destroy the object and remove it from parent objects, also removes all child objects
         */
-        void destroy();
+        void destroy(bool fromParent = false);
 
         {{klass.name}}() : {{klass.name}}(PrivateConstructor()) {}
 
