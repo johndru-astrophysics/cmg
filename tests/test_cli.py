@@ -4,7 +4,6 @@ import os
 from pathlib import Path
 import shutil
 import unittest
-import logging
 
 
 class TestCli(unittest.TestCase):
@@ -33,6 +32,20 @@ class TestCli(unittest.TestCase):
             assert os.path.exists(f"temp/solar_system/{klass}.cpp")
         assert os.path.exists("temp/solar_system/CMakeLists.txt")
         assert os.path.exists("temp/solar_system/test_solar_system.cpp")
+
+    def test_failure(self):
+        runner = CliRunner()
+        result = runner.invoke(
+            cli,
+            [
+                "--schema",
+                "tests/schemas/validation_failures.py",
+                "--output",
+                "temp/validation_failures",
+            ],
+            catch_exceptions=False,
+        )
+        assert result.exit_code == 1
 
 
 if __name__ == "__main__":

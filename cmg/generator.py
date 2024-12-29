@@ -1,11 +1,14 @@
 """A generator used to generate C++ based on a schema."""
 
+from logging import Logger
 from pathlib import Path
 import jinja2
 from cmg.templates import cmakelists_txt_j2, klass_cpp_j2, test_cpp_j2
 import cmg.templates.klass_hpp_j2 as klass_hpp_j2
 from cmg.schema import Schema, Klass, Field
 from importlib.machinery import SourceFileLoader
+
+from cmg.validation import SchemaRuleSet
 
 
 def schema_loader(schema: str) -> Schema:
@@ -15,10 +18,18 @@ def schema_loader(schema: str) -> Schema:
     return module.schema
 
 
-def generate(schema: Schema, output_dir: str) -> None:
+def generate(schema: Schema, output_dir: str, logger: Logger) -> int:
     """Generate C++ code based on the schema."""
 
-    # TODO: Validate the schema
+    logger.info("Validating schema ...")
+    errors = SchemaRuleSet().validate(schema)
+
+    if len(errors) > 0:
+        for error in errors:
+            logger.error(error.message)
+        return 1
+
+    logger.info("Generating code ...")
 
     # Create the directory
     Path(output_dir).mkdir(parents=True, exist_ok=True)
@@ -50,3 +61,5 @@ def generate(schema: Schema, output_dir: str) -> None:
     test_file = f"{output_dir}/test_{schema.namespace}.cpp"
     with open(test_file, "w") as f:
         f.write(test_template.render(schema=schema))
+
+    return 0
