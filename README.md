@@ -30,7 +30,7 @@ For example:
 cmg --schema examples/solar_system.py --output solar_system
 ```
 
-Will create a directory called `solar_system` containing the following files:
+This will create a directory called `solar_system` containing the following files:
 
 ```
 solar_system/
@@ -80,7 +80,7 @@ auto root = Root::create();
 auto solarSystem = SolarSystem::create(root, "The Solar System");
 auto sun = Sun::create(solarSystem, "The Sun");
 auto earth = Planet::create(solarSystem, "Earth");
-earth.lock()->setStar(star);
+earth.lock()->setStar(sun);
 ```
 
 Classes without parents will create shared pointers, child classes will create weak pointers.
@@ -95,7 +95,7 @@ Instances of child classes need to be locked before use:
 sun.lock()->getName(); // Returns "The Sun"
 ```
 
-Instances of root classes (i.e. classes without parents) can be used directly, without `lock()`
+Instances of root classes (i.e. classes without parents) can be used directly, without `lock()`.
 
 ### Update
 
@@ -120,7 +120,7 @@ You can check if a reference to another object is not expired before using it, l
 auto sun = earth.lock()->getSun();
 if (!sun.expired())
 {
-    std::cout << sun->lock().getName() << std::endl;
+    std::cout << sun.lock()->getName() << std::endl;
 }
 ```
 
@@ -130,8 +130,8 @@ To make a shared_ptr using a child's weak_ptr:
 
 ```c++
 auto earthPtr = earth.lock()->getptr();
-std::cout << earthPtr.getName() << std::endl;
-std::cout << earthPtr.getMass() << std::endl;
+std::cout << earthPtr->getName() << std::endl;
+std::cout << earthPtr->getMass() << std::endl;
 ```
 
 Use this to lock a weak object until it goes out of scope. This saves you from locking the object every time you want to call one of its functions.
@@ -156,9 +156,10 @@ You can create a Persistence class for any object in the parent/child tree, if y
 
 ```c++
 auto earthPersistence = solar_system::Persistence<solar_system::Planet>();
-earthPersistence.save(earth.lock()->getptr(), "earth.db")
+earthPersistence.save(earth.lock()->getptr(), "earth.db");
 ```
 
+> NOTE: if you change the schema, then any saved databases will no longer be compatible.
 
 ## Help and bug reporting
 
