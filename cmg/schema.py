@@ -140,6 +140,18 @@ class Schema:
             )
             for klass in self.classes
         ]
+
+        sources.extend(
+            [
+                "/".join(
+                    [
+                        self._output_dir.replace(os.path.sep, "/").replace("c:", "", 1),
+                        f"{klass}.cpp",
+                    ]
+                )
+                for klass in self.get_supplementary_klasses()
+            ]
+        )
         return " ".join(sources)
 
     def get_test_includes(self) -> List[str]:
@@ -150,6 +162,30 @@ class Schema:
             List[str]: A list of include statements for each class in the test file.
         """
         return [f'#include "{klass.to_snake_case()}.hpp"' for klass in self.classes]
+
+    def get_supplementary_klasses(self):
+        """
+        Get the supplementary sources for the schema.
+
+        Returns:
+            List[str]: The supplementary sources.
+        """
+        return ["identifiable", "index"]
+
+    def get_root_klass(self) -> "Klass":
+        """
+        Get the root klass for the schema.
+
+        Returns:
+            Klass: The root klass.
+
+        Raises:
+            ValueError: If no root klass is found.
+        """
+        for klass in self.classes:
+            if not klass.has_parent():
+                return klass
+        raise ValueError("No root klass found")
 
 
 @dataclass
@@ -380,6 +416,15 @@ class Klass:
             if field.has_parent():
                 return field
         raise ValueError("No parent field found")
+
+    def is_root(self) -> bool:
+        """
+        Check if the class is the root klass.
+
+        Returns:
+            bool: True if the class is the root klass, False otherwise.
+        """
+        return not self.has_parent()
 
 
 @dataclass

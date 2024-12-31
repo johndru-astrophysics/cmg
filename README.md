@@ -128,13 +128,37 @@ if (!sun.expired())
 
 To make a shared_ptr using a child's weak_ptr:
 
-```
+```c++
 auto earthPtr = earth.lock()->getptr();
 std::cout << earthPtr.getName() << std::endl;
 std::cout << earthPtr.getMass() << std::endl;
 ```
 
 Use this to lock a weak object until it goes out of scope. This saves you from locking the object every time you want to call one of its functions.
+
+## Persistence - saving/reading a database to/from disk
+
+To save a database to disk, use the Persistence class, for example:
+
+```c++
+auto persistence = solar_system::Persistence<solar_system::Root>();
+persistence.save(root, "solar_system.db");
+```
+
+Then to read the database, you can simply run:
+
+```c++
+auto persistence = solar_system::Persistence<solar_system::Root>();
+auto root = persistence.load("solar_system.db");
+```
+
+You can create a Persistence class for any object in the parent/child tree, if you only want to save a partial database. For example, to just write out data for the earth planet:
+
+```c++
+auto earthPersistence = solar_system::Persistence<solar_system::Planet>();
+earthPersistence.save(earth.lock()->getptr(), "earth.db")
+```
+
 
 ## Help and bug reporting
 

@@ -7,10 +7,10 @@ project({{schema.namespace}})
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-instr-generate -fcoverage-mapping")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -fprofile-instr-generate -fcoverage-mapping")
 cmake_policy(SET CMP0135 NEW)
 
-add_library({{schema.namespace}} {{schema.get_cmakelists_src()}})
+add_library({{schema.namespace}} "identifiable.cpp" "index.cpp" {{schema.get_cmakelists_src()}} )
 
 # Testing
 include(FetchContent)

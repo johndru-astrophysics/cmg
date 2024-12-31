@@ -298,6 +298,28 @@ class ChildHasParentRule(BaseRule):
         return errors
 
 
+class SchemaContainsOneRootKlassRule(BaseRule):
+    """
+    Rule that checks if the schema contains one root klass
+
+    Attributes:
+        name: The name of the rule
+        description: The description of the rule
+    """
+
+    def validate(self, schema) -> List[RuleError]:
+        errors = []
+        root_klasses = [klass for klass in schema.classes if not klass.has_parent()]
+        if len(root_klasses) != 1:
+            root_class_names = [klass.name for klass in root_klasses]
+            errors.append(
+                RuleError(
+                    f"Schema must contain exactly one root klass, {len(root_klasses)} found: {', '.join(root_class_names)}"
+                )
+            )
+        return errors
+
+
 class SchemaRuleSet(RuleSet):
     """
     Rule set for schema validation
@@ -309,27 +331,36 @@ class SchemaRuleSet(RuleSet):
     def __init__(self):
         rules = [
             FieldsHaveValidTypeRules(
-                "FieldsHaveValidTypeRules", "Checks if all fields have a valid type"
+                "FieldsHaveValidTypeRules",
+                "Checks if all fields have a valid type",
             ),
             FieldExampleMatchesTypeRule(
                 "FieldExampleMatchesTypeRule",
                 "Checks if the example matches the field type",
             ),
             ParentFieldExistsRule(
-                "ParentFieldExistsRule", "Checks if the parent field exists"
+                "ParentFieldExistsRule",
+                "Checks if the parent field exists",
             ),
             FieldDefaultMatchesTypeRule(
                 "FieldDefaultMatchesTypeRule",
                 "Checks if the default value matches the field type",
             ),
             KlassNamesUniqueRule(
-                "KlassNamesUniqueRule", "Checks if all klass names are unique"
+                "KlassNamesUniqueRule",
+                "Checks if all klass names are unique",
             ),
             FieldNamesUniqueRule(
-                "FieldNamesUniqueRule", "Checks if all field names are unique"
+                "FieldNamesUniqueRule",
+                "Checks if all field names are unique",
             ),
             ChildHasParentRule(
-                "ChildHasParentRule", "Checks if the child has a parent"
+                "ChildHasParentRule",
+                "Checks if the child has a parent",
+            ),
+            SchemaContainsOneRootKlassRule(
+                "SchemaContainsOneRootKlassRule",
+                "Checks if the schema contains one root klass",
             ),
         ]
 

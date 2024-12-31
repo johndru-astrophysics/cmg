@@ -4,6 +4,9 @@ TEMPLATE = """
 {%- for include in schema.get_test_includes() %}
 {{include}}
 {%- endfor %}
+#include "index.hpp"
+#include "identifiable.hpp"
+
 using namespace {{schema.namespace}};
 
 {%- for klass in schema.classes %}
@@ -46,6 +49,14 @@ protected:
 {%- endfor %}
 
 {%- for klass in schema.classes %}
+
+TEST_F(Test{{klass.name}}, test_id)
+{
+    // Check object id
+    EXPECT_EQ({{klass.get_var_name()}}->getId(), 0);
+    {{klass.get_var_name()}}->setId(1);
+    EXPECT_EQ({{klass.get_var_name()}}->getId(), 1);
+}
 
 TEST_F(Test{{klass.name}}, test_create)
 {
@@ -126,9 +137,81 @@ TEST_F(Test{{klass.name}}, test_destroy)
 
 {%- endfor %}
 
+class TestIndex : public ::testing::Test {
+
+    protected:
+        void SetUp() override
+        {
+            // Create test objects
+            object1 = std::make_shared<Identifiable>();
+            object2 = std::make_shared<Identifiable>();
+            object3 = std::make_shared<Identifiable>();
+
+            // Create index
+            index = Index();
+        }
+    public:
+        std::shared_ptr<Identifiable> object1;
+        std::shared_ptr<Identifiable> object2;
+        std::shared_ptr<Identifiable> object3;
+        Index index;
+};
+
+TEST_F(TestIndex, test_add_remove_get)
+{
+    // Check object addition
+    index.add(object1);
+    EXPECT_EQ(index.get(1), object1);
+    index.add(object2);
+    EXPECT_EQ(index.get(2), object2);
+    index.add(object3);
+    EXPECT_EQ(index.get(3), object3);
+
+    // Check object removal
+    index.remove(object2);
+    EXPECT_EQ(index.get(1), object1);
+    EXPECT_EQ(index.get(2), nullptr);
+    EXPECT_EQ(index.get(3), object3);
+
+    // Check object addition after removal
+    object2->setId(0);
+    index.add(object2);
+    EXPECT_EQ(index.get(1), object1);
+    EXPECT_EQ(index.get(2), nullptr);
+    EXPECT_EQ(index.get(3), object3);
+    EXPECT_EQ(index.get(4), object2);
+}
+
+TEST_F(TestIndex, test_add_existing)
+{
+    // Check object with exisiting ID not in index already
+    object1->setId(99);
+    index.add(object1);
+    EXPECT_EQ(index.get(99), object1);
+    index.add(object2);
+    EXPECT_EQ(index.get(100), object2);
+}
+
+TEST_F(TestIndex, test_add_existing_in_index)
+{
+    // Check object with exisiting ID already in index
+    index.add(object1);
+    EXPECT_EQ(index.get(1), object1);
+    index.add(object1);
+    EXPECT_EQ(index.get(1), object1);
+}
+
+TEST_F(TestIndex, test_add_exisiting_mismatched)
+{
+    // Check object with exisiting ID already in index but different object
+    index.add(object1);
+    EXPECT_EQ(index.get(1), object1);
+    object2->setId(1);
+    EXPECT_THROW(index.add(object2), std::invalid_argument);
+}
+
 
 #include <cstdlib>
-
 class ShellCommandEnvironment : public ::testing::Environment {
 public:
     ~ShellCommandEnvironment() override {

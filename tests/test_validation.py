@@ -9,4 +9,4 @@ class TestValidation(unittest.TestCase):
         errors = validation.SchemaRuleSet().validate(schema)
         for error in errors:
             print(error.message)
-        self.assertEqual(len(errors), 10)
+        self.assertEqual(len(errors), 11)
