@@ -9,6 +9,10 @@ TEMPLATE = """
 #include <optional>
 #include <string>
 #include <vector>
+#include <fstream>
+
+#include "identifiable.hpp"
+#include "persistable.hpp"
 
 namespace {{schema.namespace}}
 {
@@ -25,7 +29,7 @@ namespace {{schema.namespace}}
 {%- endfor %}
     */
 
-    class {{klass.name}} : public std::enable_shared_from_this<{{klass.name}}>
+    class {{klass.name}} : public std::enable_shared_from_this<{{klass.name}}>, public Identifiable, public Persistable<{{klass.name}}>
     {
         struct PrivateConstructor
         {
@@ -38,6 +42,7 @@ namespace {{schema.namespace}}
 
     public:
         {{klass.name}}(PrivateConstructor) {}
+
 
         /**
             @brief Create a new {{klass.name}} object
@@ -66,7 +71,7 @@ namespace {{schema.namespace}}
             @return A shared pointer to the object
         */
         std::shared_ptr<{{klass.name}}> getptr();
-
+        
 {%- for field in klass.get_ordered_fields() %}
     {%- if field.has_parent(): %}
         /**
@@ -119,6 +124,37 @@ namespace {{schema.namespace}}
 
 {%- endfor %}
 
+        /**
+         * @brief Add the object to an index
+         * @param index The index to add the object to
+         */
+        void addToIndex(std::shared_ptr<Index> index);
+        
+        /**
+         * @brief Serialize the object's children to a stream
+         *@param os The stream to serialize to
+         */
+        void serializeFields(std::ostream &os);
+
+        /**
+         * @brief Serialize the object's references to a stream
+         * @param os The stream to serialize to
+         */
+        void serializeReferences(std::ostream &os);
+
+        /**
+         * @brief Deserialize the object's children from a stream
+         * @param is The stream to deserialize from
+         * @param index The index to use for reference resolution
+         */
+        static std::shared_ptr<{{klass.name}}> deserializeFields(std::istream &is, std::shared_ptr<Index> index);
+
+        /**
+         * @brief Deserialize the object's references from a stream
+         * @param is The stream to deserialize from
+         * @param index The index to use for reference resolution
+         */
+        void deserializeReferences(std::istream &is, std::shared_ptr<Index> index);
     };
 }
 #endif

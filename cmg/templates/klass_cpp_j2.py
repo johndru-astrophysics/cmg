@@ -8,6 +8,16 @@ TEMPLATE = """
 namespace {{schema.namespace}}
 {
 
+    /*
+    unsigned long {{klass.name}}::getId() const {
+        return Identifiable::getId();
+    }
+
+    void {{klass.name}}::setId(unsigned long id) {
+        Identifiable::setId(id);
+    }
+    */
+    
     {{klass.get_create_ptr_type()}} {{klass.name}}::create({{klass.get_create_arguments()}})
     {
             auto object = std::make_shared<{{klass.name}}>(PrivateConstructor());
@@ -58,6 +68,7 @@ namespace {{schema.namespace}}
         }
     {%- endif %}
 {%- endfor %}
+
 {%- for field in klass.get_ordered_fields() %}
     {%- if field.is_child %}
 
@@ -89,7 +100,7 @@ namespace {{schema.namespace}}
     {
         return shared_from_this();
     }
-
+    
 {%- for field in klass.get_ordered_fields() %}
     {%- if field.has_parent() %}
         {% if field.is_list %}
@@ -197,7 +208,208 @@ namespace {{schema.namespace}}
         return {{field.to_camel_case()}};
     }
 
+
 {%- endfor %}
 
+    void {{klass.name}}::addToIndex(std::shared_ptr<Index> index)
+    {
+        index->add(getptr());
+{%- for field in klass.get_ordered_fields() %}
+    {%- if field.is_child %}
+
+        // Add {{field.to_camel_case()}} to index
+        {%- if field.is_list %}
+        for (auto &item : {{field.to_camel_case()}})
+        {
+            item->addToIndex(index);
+        }
+        {%- else %}
+        if ({{field.to_camel_case()}} != nullptr)
+        {
+            {{field.to_camel_case()}}->addToIndex(index);
+        }
+        {%- endif %}
+    {%- endif %}
+{%- endfor %}
+    }
+
+    void {{klass.name}}::serializeFields(std::ostream &os)
+    {
+        // Serialize ID
+        os.write(reinterpret_cast<const char *>(&id), sizeof(id));
+
+{%- for field in klass.get_ordered_fields() %}
+
+    {%- if field.name != "id"  %}
+        {%- if field.has_parent() %}
+
+        // Serialize {{field.to_camel_case()}}
+        unsigned long {{field.to_camel_case()}}Id = {{field.to_camel_case()}}.lock() ? {{field.to_camel_case()}}.lock()->getId() : 0;
+        os.write(reinterpret_cast<const char *>(&{{field.to_camel_case()}}Id), sizeof({{field.to_camel_case()}}Id));
+        {%- elif field.is_child %}
+            {%- if field.is_list %}
+
+        // Serialize {{field.to_camel_case()}}
+        size_t {{field.to_camel_case()}}Size = {{field.to_camel_case()}}.size();
+        os.write(reinterpret_cast<const char *>(&{{field.to_camel_case()}}Size), sizeof({{field.to_camel_case()}}Size));
+        for (const auto &item : {{field.to_camel_case()}})
+        {
+            item->serializeFields(os);
+        }
+            {%- else %}
+
+        // Serialize {{field.to_camel_case()}}
+        if ({{field.to_camel_case()}} == nullptr)
+        {
+            unsigned long nullId = 0;
+            os.write(reinterpret_cast<const char *>(&nullId), sizeof(nullId));
+        }
+        else
+        {
+            unsigned long itemId = {{field.to_camel_case()}}->getId();
+            os.write(reinterpret_cast<const char *>(&itemId), sizeof(itemId));
+            {{field.to_camel_case()}}->serializeFields(os);
+        }
+            {%- endif %}
+        {%- else %}
+            {%- if field.get_cpp_type() == "std::string" %}
+
+        // Serialize {{field.to_camel_case()}}
+        size_t {{field.to_camel_case()}}Size = {{field.to_camel_case()}}.size();
+        os.write(reinterpret_cast<const char *>(&{{field.to_camel_case()}}Size), sizeof({{field.to_camel_case()}}Size));
+        os.write({{field.to_camel_case()}}.c_str(), {{field.to_camel_case()}}.size());
+            {%- elif not field.is_reference() %}
+
+        // Serialize {{field.to_camel_case()}}
+        os.write(reinterpret_cast<const char *>(&{{field.to_camel_case()}}), sizeof({{field.to_camel_case()}}));
+            {%- endif %}
+        {%- endif %}
+    {%- endif %}
+{%- endfor %}
+    }
+
+    void {{klass.name}}::serializeReferences(std::ostream &os)
+    {
+{%- for field in klass.get_ordered_fields() %}
+    {%- if field.is_reference() and not field.has_parent() and not field.is_child %}
+        // Serialize {{field.to_camel_case()}}
+        if ( {{field.to_camel_case()}}.expired() )
+        {
+            unsigned long nullId = 0;
+            os.write(reinterpret_cast<const char *>(&nullId), sizeof(nullId));
+        }
+        else
+        {
+            unsigned long {{field.to_camel_case()}}Id = {{field.to_camel_case()}}.lock()->getId();
+            os.write(reinterpret_cast<const char *>(&{{field.to_camel_case()}}Id), sizeof({{field.to_camel_case()}}Id));
+        }
+    {%- elif field.is_child %}
+        // Serialize {{field.to_camel_case()}}
+        {%- if field.is_list %}
+        for (const auto &item : {{field.to_camel_case()}})
+        {
+            item->serializeReferences(os);
+        }
+        {%- else %}
+        if ({{field.to_camel_case()}} != nullptr)
+        {
+            {{field.to_camel_case()}}->serializeReferences(os);
+        }
+        {%- endif %}
+    {%- endif %}
+{%- endfor %}
+    }
+
+    std::shared_ptr<{{klass.name}}> {{klass.name}}::deserializeFields(std::istream &is, std::shared_ptr<Index> index)
+    {
+        auto object = std::make_shared<{{klass.name}}>(PrivateConstructor());
+        
+        // Deserialize ID
+        is.read(reinterpret_cast<char *>(&object->id), sizeof(object->id));
+
+        // Add to index
+        object->addToIndex(index);
+
+{%- for field in klass.get_ordered_fields() %}
+    {%- if field.name != "id"  %}
+        {%- if field.has_parent() %}
+        
+        // Deserialize {{field.to_camel_case()}}
+        unsigned long {{field.to_camel_case()}}Id;
+        is.read(reinterpret_cast<char *>(&{{field.to_camel_case()}}Id), sizeof({{field.to_camel_case()}}Id));
+        object->{{field.to_camel_case()}} = std::dynamic_pointer_cast<{{field.type}}>(index->get({{field.to_camel_case()}}Id));
+
+        {%- elif field.is_child %}
+            {%- if field.is_list %}
+
+        // Deserialize {{field.to_camel_case()}}
+        size_t {{field.to_camel_case()}}Size;
+        is.read(reinterpret_cast<char *>(&{{field.to_camel_case()}}Size), sizeof({{field.to_camel_case()}}Size));
+        for (size_t i = 0; i < {{field.to_camel_case()}}Size; i++)
+        {
+            auto item = {{field._child_klass.name}}::deserializeFields(is, index);
+            object->{{field.to_camel_case()}}.push_back(item);
+        }
+            {%- else %}
+
+        // Deserialize {{field.to_camel_case()}}
+        unsigned long {{field.to_camel_case()}}Id;
+        is.read(reinterpret_cast<char *>(&{{field.to_camel_case()}}Id), sizeof({{field.to_camel_case()}}Id));
+        if ({{field.to_camel_case()}}Id != 0)
+        {
+            object->{{field.to_camel_case()}} = {{field._child_klass.name}}::deserializeFields(is, index);
+        }
+            {%- endif %}
+        {%- else %}
+            {%- if field.get_cpp_type() == "std::string" %}
+
+        // Deserialize {{field.to_camel_case()}}
+        size_t {{field.to_camel_case()}}Size;
+        is.read(reinterpret_cast<char *>(&{{field.to_camel_case()}}Size), sizeof({{field.to_camel_case()}}Size));
+        char *{{field.to_camel_case()}}Buffer = new char[{{field.to_camel_case()}}Size];
+        is.read({{field.to_camel_case()}}Buffer, {{field.to_camel_case()}}Size);
+        object->{{field.to_camel_case()}} = std::string({{field.to_camel_case()}}Buffer, {{field.to_camel_case()}}Size);
+        delete[] {{field.to_camel_case()}}Buffer;
+            {%- elif not field.is_reference() %}
+
+        // Deserialize {{field.to_camel_case()}}
+        is.read(reinterpret_cast<char *>(&object->{{field.to_camel_case()}}), sizeof(object->{{field.to_camel_case()}}));
+            {%- endif %}
+        {%- endif %}
+    {%- endif %}
+{%- endfor %}
+
+        return object;
+    }
+
+    void {{klass.name}}::deserializeReferences(std::istream &is, std::shared_ptr<Index> index)
+    {
+{%- for field in klass.get_ordered_fields() %}
+    {%- if field.is_reference() and not field.has_parent() and not field.is_child %}
+
+        // Deserialize {{field.to_camel_case()}}
+        unsigned long {{field.to_camel_case()}}Id;
+        is.read(reinterpret_cast<char *>(&{{field.to_camel_case()}}Id), sizeof({{field.to_camel_case()}}Id));
+        if ({{field.to_camel_case()}}Id != 0)
+        {
+            {{field.to_camel_case()}} = std::dynamic_pointer_cast<{{field.type}}>(index->get({{field.to_camel_case()}}Id));
+        }
+    {%- elif field.is_child %}
+
+        // Deserialize {{field.to_camel_case()}}
+        {%- if field.is_list %}
+        for (auto &item : {{field.to_camel_case()}})
+        {
+            item->deserializeReferences(is, index);
+        }
+        {%- else %}
+        if ({{field.to_camel_case()}} != nullptr)
+        {
+            {{field.to_camel_case()}}->deserializeReferences(is, index);
+        }
+        {%- endif %}
+    {%- endif %}
+{%- endfor %}
+    }
 }
 """
