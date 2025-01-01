@@ -6,6 +6,7 @@ schema = Schema(
     name="EDA",
     description="A schema for an EDA database",
     namespace="eda",
+    version="0.0.1_test",
     classes=[
         Klass(
             name="Root",

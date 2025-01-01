@@ -6,6 +6,7 @@ schema = Schema(
     name="Solar System",
     description="A schema for the Solar System",
     namespace="solar_system",
+    version="0.0.1_test",
     classes=[
         Klass(
             name="Root",
