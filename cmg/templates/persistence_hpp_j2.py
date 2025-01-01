@@ -4,6 +4,9 @@ TEMPLATE = """
 #define _PERSITANCE_HPP_
 
 #include <memory>
+#include <fstream>
+#include <string>
+#include <stdexcept>
 #include "index.hpp"
 #include "persistable.hpp"
 #include "identifiable.hpp"
@@ -36,6 +39,12 @@ namespace solar_system
             // Save root object
             std::ofstream os(filename, std::ios::binary);
 
+            // Write schema version
+            std::string schemaVersion = "{{schema.version}}";
+            size_t versionSize = schemaVersion.size();
+            os.write(reinterpret_cast<const char *>(&versionSize), sizeof(size_t));
+            os.write(schemaVersion.c_str(), schemaVersion.size());
+
             // Serialize
             root->serializeFields(os);
             root->serializeReferences(os);
@@ -52,6 +61,20 @@ namespace solar_system
         {
             // Open file
             std::ifstream is(filename, std::ios::binary);
+
+            // Read schema version
+            size_t versionSize;
+            is.read(reinterpret_cast<char *>(&versionSize), sizeof(size_t));
+            char *versionBuffer = new char[versionSize];
+            is.read(versionBuffer, versionSize);
+            std::string schemaVersion(versionBuffer, versionSize);
+            delete[] versionBuffer;
+
+            // Check schema version
+            if (schemaVersion != "{{schema.version}}")
+            {
+                throw std::runtime_error("Invalid schema version");
+            }
 
             // Create index
             auto index = std::make_shared<Index>();

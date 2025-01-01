@@ -100,6 +100,7 @@
 <li><a class="reference internal" href="#cmg.schema.Schema.name"><code class="docutils literal notranslate"><span class="pre">Schema.name</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Schema.namespace"><code class="docutils literal notranslate"><span class="pre">Schema.namespace</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Schema.set_output_dir"><code class="docutils literal notranslate"><span class="pre">Schema.set_output_dir()</span></code></a></li>
+<li><a class="reference internal" href="#cmg.schema.Schema.version"><code class="docutils literal notranslate"><span class="pre">Schema.version</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#cmg.schema.to_camel_case"><code class="docutils literal notranslate"><span class="pre">to_camel_case()</span></code></a></li>
@@ -530,7 +531,7 @@ cast (bool): Whether to cast the type.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cmg.schema.Schema">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.schema.</span></span><span class="sig-name descname"><span class="pre">Schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classes:</span> <span class="pre">~typing.List[~cmg.schema.Klass]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.schema.Schema" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.schema.</span></span><span class="sig-name descname"><span class="pre">Schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classes:</span> <span class="pre">~typing.List[~cmg.schema.Klass]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.schema.Schema" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A schema used to define the structure of the data in a model.</p>
 <dl>
@@ -656,6 +657,11 @@ field_name (str): The name of the field.</p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmg.schema.Schema.version">
+<span class="sig-name descname"><span class="pre">version</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#cmg.schema.Schema.version" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

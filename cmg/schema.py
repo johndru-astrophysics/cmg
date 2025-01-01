@@ -57,6 +57,7 @@ class Schema:
     name: str
     description: str
     namespace: str
+    version: str
     classes: List["Klass"] = field(default_factory=list)
     _output_dir: str = field(default=".", repr=False, init=False)
 

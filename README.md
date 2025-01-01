@@ -59,6 +59,12 @@ Then references can be created between classes in the DAG hierarchy (dotted line
 
 ![schema](https://github.com/johndru-astrophysics/cmg/blob/main/assets/cmg.drawio.png?raw=true)
 
+## Schema Version
+
+Each schema has a required version number. When you serialize the model, the version number is stored in the database. When the database is read, the version number of the database is compared to the version of the schema used to build the C++ model. This ensures you are reading a database with a compatible structure.
+
+| IMPORTANT: You must increment the schema version every time you update a class or field.
+
 ## Examples
 
 Please see the example schemas in the `examples` directory.
