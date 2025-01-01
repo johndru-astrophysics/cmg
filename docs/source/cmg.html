@@ -80,6 +80,7 @@
 <li><a class="reference internal" href="#cmg.schema.Klass.get_var_name"><code class="docutils literal notranslate"><span class="pre">Klass.get_var_name()</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Klass.has_parent"><code class="docutils literal notranslate"><span class="pre">Klass.has_parent()</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Klass.init_fields"><code class="docutils literal notranslate"><span class="pre">Klass.init_fields()</span></code></a></li>
+<li><a class="reference internal" href="#cmg.schema.Klass.is_root"><code class="docutils literal notranslate"><span class="pre">Klass.is_root()</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Klass.link"><code class="docutils literal notranslate"><span class="pre">Klass.link()</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Klass.name"><code class="docutils literal notranslate"><span class="pre">Klass.name</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Klass.to_snake_case"><code class="docutils literal notranslate"><span class="pre">Klass.to_snake_case()</span></code></a></li>
@@ -92,6 +93,8 @@
 <li><a class="reference internal" href="#cmg.schema.Schema.get_field"><code class="docutils literal notranslate"><span class="pre">Schema.get_field()</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Schema.get_klass"><code class="docutils literal notranslate"><span class="pre">Schema.get_klass()</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Schema.get_lcov_src"><code class="docutils literal notranslate"><span class="pre">Schema.get_lcov_src()</span></code></a></li>
+<li><a class="reference internal" href="#cmg.schema.Schema.get_root_klass"><code class="docutils literal notranslate"><span class="pre">Schema.get_root_klass()</span></code></a></li>
+<li><a class="reference internal" href="#cmg.schema.Schema.get_supplementary_klasses"><code class="docutils literal notranslate"><span class="pre">Schema.get_supplementary_klasses()</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Schema.get_test_includes"><code class="docutils literal notranslate"><span class="pre">Schema.get_test_includes()</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Schema.link"><code class="docutils literal notranslate"><span class="pre">Schema.link()</span></code></a></li>
 <li><a class="reference internal" href="#cmg.schema.Schema.name"><code class="docutils literal notranslate"><span class="pre">Schema.name</span></code></a></li>
@@ -144,6 +147,10 @@
 </li>
 <li><a class="reference internal" href="#cmg.validation.RuleSet"><code class="docutils literal notranslate"><span class="pre">RuleSet</span></code></a><ul>
 <li><a class="reference internal" href="#cmg.validation.RuleSet.validate"><code class="docutils literal notranslate"><span class="pre">RuleSet.validate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cmg.validation.SchemaContainsOneRootKlassRule"><code class="docutils literal notranslate"><span class="pre">SchemaContainsOneRootKlassRule</span></code></a><ul>
+<li><a class="reference internal" href="#cmg.validation.SchemaContainsOneRootKlassRule.validate"><code class="docutils literal notranslate"><span class="pre">SchemaContainsOneRootKlassRule.validate()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#cmg.validation.SchemaRuleSet"><code class="docutils literal notranslate"><span class="pre">SchemaRuleSet</span></code></a></li>
@@ -489,6 +496,16 @@ cast (bool): Whether to cast the type.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="cmg.schema.Klass.is_root">
+<span class="sig-name descname"><span class="pre">is_root</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#cmg.schema.Klass.is_root" title="Link to this definition"></a></dt>
+<dd><p>Check if the class is the root klass.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>bool: True if the class is the root klass, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="cmg.schema.Klass.link">
 <span class="sig-name descname"><span class="pre">link</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cmg.schema.Klass.link" title="Link to this definition"></a></dt>
 <dd><p>Link the class to its fields and schema.</p>
@@ -578,6 +595,28 @@ field_name (str): The name of the field.</p>
 <dd><p>Get the source files for the lcov command.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>str: The source files.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmg.schema.Schema.get_root_klass">
+<span class="sig-name descname"><span class="pre">get_root_klass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cmg.schema.Klass" title="cmg.schema.Klass"><span class="pre">Klass</span></a></span></span><a class="headerlink" href="#cmg.schema.Schema.get_root_klass" title="Link to this definition"></a></dt>
+<dd><p>Get the root klass for the schema.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Klass: The root klass.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If no root klass is found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmg.schema.Schema.get_supplementary_klasses">
+<span class="sig-name descname"><span class="pre">get_supplementary_klasses</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmg.schema.Schema.get_supplementary_klasses" title="Link to this definition"></a></dt>
+<dd><p>Get the supplementary sources for the schema.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>List[str]: The supplementary sources.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -880,6 +919,30 @@ description: The description of the rule</p>
 <dt class="sig sig-object py" id="cmg.validation.RuleSet.validate">
 <span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cmg.validation.RuleError" title="cmg.validation.RuleError"><span class="pre">RuleError</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cmg.validation.RuleSet.validate" title="Link to this definition"></a></dt>
 <dd><p>Validates a schema against a set of rules</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>schema: The schema to validate</p>
+</dd>
+<dt>Returns:</dt><dd><p>A list of errors</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cmg.validation.SchemaContainsOneRootKlassRule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmg.validation.</span></span><span class="sig-name descname"><span class="pre">SchemaContainsOneRootKlassRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmg.validation.SchemaContainsOneRootKlassRule" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cmg.validation.BaseRule" title="cmg.validation.BaseRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRule</span></code></a></p>
+<p>Rule that checks if the schema contains one root klass</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>name: The name of the rule
+description: The description of the rule</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cmg.validation.SchemaContainsOneRootKlassRule.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cmg.validation.RuleError" title="cmg.validation.RuleError"><span class="pre">RuleError</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cmg.validation.SchemaContainsOneRootKlassRule.validate" title="Link to this definition"></a></dt>
+<dd><p>Validates a schema against a rule</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>schema: The schema to validate</p>
 </dd>

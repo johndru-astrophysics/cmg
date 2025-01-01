@@ -5,3 +5,8 @@ build
 dist
 generated
 temp
+*.profdata
+*.profraw
+lcov.info
+*.db
+*.log

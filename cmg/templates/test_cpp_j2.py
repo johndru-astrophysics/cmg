@@ -6,6 +6,7 @@ TEMPLATE = """
 {%- endfor %}
 #include "index.hpp"
 #include "identifiable.hpp"
+#include "persistence.hpp"
 
 using namespace {{schema.namespace}};
 
@@ -134,6 +135,28 @@ TEST_F(Test{{klass.name}}, test_destroy)
     {{klass.get_var_name()}}->destroy();
 }
 
+TEST_F(Test{{klass.name}}, test_save_load)
+{
+    // Check object save and load
+    auto persistance = solar_system::Persistence<{{schema.namespace}}::{{klass.name}}>();
+    {{klass.get_var_name()}}->update({{klass.get_example_update_arguments()}});
+    persistance.save({{klass.get_var_name()}}, "{{klass.get_var_name()}}.db");
+    auto {{klass.get_var_name()}}Loaded = persistance.load("{{klass.get_var_name()}}.db");
+
+    {%- for field in klass.get_ordered_fields() %}
+        {%- if field.get_example() != "nullptr" %}
+            {%- if field.is_child %}
+                {%- if field.is_list %}
+    EXPECT_EQ({{klass.get_var_name()}}Loaded->get{{field.to_camel_case(upper_first=True)}}().size(), {{klass.get_var_name()}}->get{{field.to_camel_case(upper_first=True)}}().size());
+                {%- else %}
+    EXPECT_EQ({{klass.get_var_name()}}Loaded->get{{field.to_camel_case(upper_first=True)}}().getId(), {{klass.get_var_name()}}->get{{field.to_camel_case(upper_first=True)}}().getId());
+                {%- endif %}
+            {%- elif not field.has_parent() %}
+    EXPECT_EQ({{klass.get_var_name()}}Loaded->get{{field.to_camel_case(upper_first=True)}}(), {{field.get_example()}});
+            {%- endif %}
+        {%- endif %}
+    {%- endfor %}
+}
 
 {%- endfor %}
 
