@@ -4,6 +4,7 @@ schema = Schema(
     name="ValidationFailures",
     description="A schema for validation failures",
     namespace="validation_failures",
+    version="0.0.1_test",
     classes=[
         Klass(
             name="Root",

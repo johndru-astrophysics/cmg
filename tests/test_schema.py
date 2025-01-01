@@ -21,6 +21,7 @@ class TestSchema(unittest.TestCase):
             description="A test schema",
             namespace="test",
             classes=[self.klass],
+            version="something",
         )
         self.schema.link()
         self.schema.set_output_dir("output")
