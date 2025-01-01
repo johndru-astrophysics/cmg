@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cmg"
-version = "1.1.0"
+version = "1.2.0"
 description = "C++11 model generation"
 authors = ["John Dru <john@muopia.com>"]
 readme = "README.md"
