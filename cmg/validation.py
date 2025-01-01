@@ -4,7 +4,7 @@ from abc import ABC
 from dataclasses import dataclass
 from typing import List, Sequence
 
-from cmg.schema import Schema
+from cmg.schema import TYPEMAP, Schema
 
 
 @dataclass
@@ -87,7 +87,7 @@ class FieldsHaveValidTypeRules(BaseRule):
 
     def validate(self, schema) -> List[RuleError]:
         # Valid primitive types
-        valid_types = ["str", "int", "bool", "double", "float"]
+        valid_types = list(TYPEMAP.keys())
 
         # Valid class types
         valid_types.extend([klass.name for klass in schema.classes])
@@ -119,16 +119,9 @@ class FieldExampleMatchesTypeRule(BaseRule):
         for klass in schema.classes:
             for field in klass.fields:
                 has_error = False
-                if field.type == "str" and not isinstance(field.example, str):
-                    has_error = True
-                elif field.type == "int" and not isinstance(field.example, int):
-                    has_error = True
-                elif field.type == "bool" and not isinstance(field.example, bool):
-                    has_error = True
-                elif field.type == "double" and not isinstance(field.example, float):
-                    has_error = True
-                elif field.type == "float" and not isinstance(field.example, float):
-                    has_error = True
+                if field.type in TYPEMAP:
+                    if not isinstance(field.example, TYPEMAP[field.type][1]):
+                        has_error = True
 
                 if has_error:
                     errors.append(
@@ -155,16 +148,9 @@ class FieldDefaultMatchesTypeRule(BaseRule):
                 if field.default is None:
                     continue
                 has_error = False
-                if field.type == "str" and not isinstance(field.default, str):
-                    has_error = True
-                elif field.type == "int" and not isinstance(field.default, int):
-                    has_error = True
-                elif field.type == "bool" and not isinstance(field.default, bool):
-                    has_error = True
-                elif field.type == "double" and not isinstance(field.default, float):
-                    has_error = True
-                elif field.type == "float" and not isinstance(field.default, float):
-                    has_error = True
+                if field.type in TYPEMAP:
+                    if not isinstance(field.default, TYPEMAP[field.type][1]):
+                        has_error = True
 
                 if has_error:
                     errors.append(

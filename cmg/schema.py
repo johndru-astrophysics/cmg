@@ -4,6 +4,47 @@ from dataclasses import dataclass, field
 import os
 from typing import Any, List, Optional
 
+"""
+Define the type map for C++ types: https://en.cppreference.com/w/cpp/language/types
+The key is the type in the schema, the value is a tuple with the C++ type and the Python type
+"""
+TYPEMAP = {
+    "str": ("std::string", str),
+    "signed char*": ("std::string", str),
+    "unsigned char*": ("std::string", str),
+    "char*": ("std::string", str),
+    "signed char": ("signed char", int),
+    "unsigned char": ("unsigned char", int),
+    "char": ("char", int),
+    "short": ("short", int),
+    "short int": ("short int", int),
+    "signed short": ("signed short", int),
+    "signed short int": ("signed short int", int),
+    "unsigned short": ("unsigned short", int),
+    "unsigned short int": ("unsigned short int", int),
+    "int": ("int", int),
+    "signed": ("signed", int),
+    "signed int": ("signed int", int),
+    "unsigned": ("unsigned", int),
+    "unsigned int": ("unsigned int", int),
+    "long": ("long", int),
+    "long int": ("long int", int),
+    "signed long": ("signed long", int),
+    "signed long int": ("signed long int", int),
+    "unsigned long": ("unsigned long", int),
+    "unsigned long int": ("unsigned long int", int),
+    "long long": ("long long", int),
+    "long long int": ("long long int", int),
+    "signed long long": ("signed long long", int),
+    "signed long long int": ("signed long long int", int),
+    "unsigned long long": ("unsigned long long", int),
+    "unsigned long long int": ("unsigned long long int", int),
+    "float": ("float", float),
+    "double": ("double", float),
+    "long double": ("long double", float),
+    "bool": ("bool", bool),
+}
+
 
 def to_snake_case(name: str) -> str:
     """
@@ -532,14 +573,8 @@ class Field:
                 return f"std::weak_ptr<{self.type}>"
 
         # Handle other fields
-        if self.type == "str":
-            type = "std::string"
-        elif self.type == "float":
-            type = "float"
-        elif self.type == "int":
-            type = "int"
-        elif self.type == "bool":
-            type = "bool"
+        if self.type in TYPEMAP:
+            type = TYPEMAP[self.type][0]
         else:
             type = self.type
 
