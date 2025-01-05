@@ -31,6 +31,7 @@ namespace {{schema.namespace}}
 
     class {{klass.name}} : public std::enable_shared_from_this<{{klass.name}}>, public Identifiable, public Persistable<{{klass.name}}>
     {
+    private:
         struct PrivateConstructor
         {
             PrivateConstructor() = default;
@@ -155,6 +156,8 @@ namespace {{schema.namespace}}
          * @param index The index to use for reference resolution
          */
         void deserializeReferences(std::istream &is, std::shared_ptr<Index> index);
+    
+
     };
 }
 #endif

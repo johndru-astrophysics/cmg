@@ -19,8 +19,6 @@ namespace solar_system
     template <typename T, typename = std::enable_if_t<std::is_base_of_v<Persistable<T>, T> && std::is_base_of_v<Identifiable, T>>>
     class Persistence
     {
-    private:
-        std::shared_ptr<Index> index;
     public:
         Persistence() {
             index = std::make_shared<Index>();
@@ -91,6 +89,9 @@ namespace solar_system
 
             return root;
         }
+
+    private:
+        std::shared_ptr<Index> index;
     };
 }
 

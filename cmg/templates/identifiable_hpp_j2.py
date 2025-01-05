@@ -13,9 +13,6 @@ namespace {{schema.namespace}} {
 
     class Identifiable
     {
-    protected:
-        unsigned long id = 0;
-
     public:
         Identifiable() = default;
         virtual ~Identifiable() = default;
@@ -36,6 +33,10 @@ namespace {{schema.namespace}} {
          * @brief Add the object to an index
          */
         void addToIndex(std::shared_ptr<Index> index);
+
+    protected:
+        unsigned long id = 0;
+
     };
 
 }

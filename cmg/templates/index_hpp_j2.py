@@ -15,9 +15,6 @@ namespace {{schema.namespace}}
 
     class Index
     {
-        unsigned long nextId = 1;
-        std::map<unsigned long, std::shared_ptr<Identifiable>> objects;
-
         public:
             Index() = default;
             ~Index() = default;
@@ -41,6 +38,10 @@ namespace {{schema.namespace}}
                 * @return The object with the given id
             */
             std::shared_ptr<Identifiable> get(unsigned long id);
+
+        private:
+            unsigned long nextId = 1;
+            std::map<unsigned long, std::shared_ptr<Identifiable>> objects;
 
     };
 }
