@@ -19,8 +19,13 @@ namespace solar_system
     template <typename T, typename = std::enable_if_t<std::is_base_of_v<Persistable<T>, T> && std::is_base_of_v<Identifiable, T>>>
     class Persistence
     {
+    private:
+        std::shared_ptr<Index> index;
     public:
-        Persistence() = default;
+        Persistence() {
+            index = std::make_shared<Index>();
+        };
+
         ~Persistence() = default;
 
         /*
@@ -30,9 +35,6 @@ namespace solar_system
         */
         void save(std::shared_ptr<T> root, std::string filename)
         {
-            // Create index
-            auto index = std::make_shared<Index>();
-
             // Add root object to index
             root->addToIndex(index);
 

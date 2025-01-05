@@ -156,6 +156,19 @@ TEST_F(Test{{klass.name}}, test_save_load)
             {%- endif %}
         {%- endif %}
     {%- endfor %}
+
+    {%- for field in klass.get_ordered_fields() %}
+        {%- if field.is_child and field.is_list %}
+    // Create 100 new child objects
+    for (int i = 0; i < 100; i++)
+    {
+        {{field._child_klass.name}}::create({{field._child_klass.get_example_arguments()}});
+    }
+
+    persistance.save({{klass.get_var_name()}}, "{{klass.get_var_name()}}_plus100.db");
+        {%- endif %}
+    {%- endfor %}
+
 }
 
 {%- endfor %}
